@@ -20,6 +20,7 @@ body {
 }
 
 footer {
+  margin-top: auto;
   height: 35px;
   padding: 20px;
   margin-top: auto;
@@ -30,7 +31,7 @@ footer {
 
 nav {
   background-color: #B2BEBF;
-  height: 100%;
+  height: auto; 
   width: 200px;
   display: flex;
   flex-direction: column;
@@ -54,7 +55,7 @@ nav a:hover {
 }
 
 .page {
-  height: 100%;
+  height: 100vh;
   display: flex;
 }
 
@@ -92,4 +93,47 @@ nav a:hover {
   flex-wrap: wrap;
 }
 
+.content {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
 
+article {
+  margin: 20px;
+  padding: 50px;
+  height: auto;
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0px 8px 10px 0px #CFCFCF;
+}
+
+form {
+  background-color: white;
+  padding: 50px;
+  height: auto;
+  width: 30%;
+  border-radius: 8px;
+  box-shadow: 0px 8px 10px 0px #CFCFCF;
+}
+
+.card {
+  background-color: white;
+  width: 225px;
+  height: 300px;
+  padding: 10px;
+  padding-left: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 8px 10px 0px #CFCFCF;
+}
+
+.card h1 {
+  font-size: 20px;
+}
+
+.card img {
+  width: 225px;
+  height: 200px;
+  border-radius: 8px;
+}
