@@ -92,6 +92,8 @@ form {
   display: flex;
 }
 
+/* Colors and basic styles */
+
 .bright {
   background-color: #F2F2F2;
   color: #044040;
@@ -115,9 +117,18 @@ form {
   color: #F2F2F2;
 }
 
+/* Card styles */
+
+.card-holder {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
 .card {
   background-color: white;
   width: 225px;
+  margin: 10px;
   height: 300px;
   padding: 10px;
   padding-left: 30px;
@@ -131,7 +142,7 @@ form {
 
 .card img {
   width: 225px;
-  height: 200px;
+  height: auto;
   border-radius: 8px;
 }
 
