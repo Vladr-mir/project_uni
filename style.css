@@ -1,7 +1,7 @@
 * {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   /* debug only */
-  /* border: 1px solid lightblue; */
+ /* border: 1px solid lightblue; */
 }
 
 /* color_palette:
@@ -146,6 +146,33 @@ form {
 .card img {
   width: 225px;
   height: auto;
+  border-radius: 8px;
+}
+
+/* Paper styles (similar to .card) */
+
+.paper-holder {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.paper {
+  margin: 20px;
+  padding: 20px;
+  height: auto;
+  box-shadow: 0px 8px 10px 0px #CFCFCF;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 30%;
+}
+
+.paper image {
+  width: 35%;
+  height: auto;
+  margin: 10px;
   border-radius: 8px;
 }
 
