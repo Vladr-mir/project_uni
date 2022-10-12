@@ -1,127 +1,94 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <title>Servicios</title>
-    <style>
-        p.white {
-            color: white;
-        }
-
-        body {
-            background-color: #1C1C1C;
-        }
-
-        .formato1 {
-            background-color: #800000;
-            text-align: center;
-            font-weight: bold;
-            height: 30px
-        }
-
-        #cabecera {
-            background-color: #800000;
-            text-align: center;
-            font-weight: bold;
-            height: 50px
-        }
-
-        #contenido {
-            display: flex;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .negrita {
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../style.css">
+  <script src="main.js" defer></script>
+  <title>Template</title>
 </head>
-
 <body>
-    <TABLE>
-        <TR>
-            <TD COLSPAN="2">
-                <IMG SRC="../images/Encabezado jpg.jpg" width="100%" height="200px">
-            </TD>
-        </TR>
-        <TR>
-            <TD COLSPAN="2" class="formato1">
-                <a href="../index.html">Inicio</a> |
-                <a href="../home.html">Home</a> |
-                <a href="products.html">Productos</a> |
-                <a href="services.html">Servicios</a> |
-                <a href="about.html">Sobre nosotros</a> |
-                <a href="oferts.html">Ofertas</a> |
-                <a href="tipos_de_cocina.html">Tipos de cocina</a> |
-                <a href="contact.html">Contactanos</a> |
-            </TD>
-        </TR>
-        <TR>
-            <TD>
+  <!-- Titulo principal de la pagina -->
+  <header class="bright">
+    <p>EL PROGRESO</p>
+    <button onclick="location.href='about:blank'">Iniciar sesión</button>
+  </header>
 
-        <TR>
-            <TD COLSPAN="3" id="cabecera">
-                Servicios que se ofrece<BR>
-            </TD>
-        </TR>
-        <TR>
-            <TD id="contenido">
+  <div class="page">
+    <!-- Barra de navegación izquierda -->
+    <nav>
+      <a href="">Inicio</a>
+      <a href="">Productos</a>
+      <a href="">Servicios</a>
+      <a href="">Sobre nosotros</a>
+      <a href="">Ofertas</a>
+      <a href="">Tipos de cocina</a>
+      <a href="">Contactanos</a>
+    </nav>
 
-                <table>
+    <!-- En esta seccion se encuentra el contenido de la pagina -->
+    <section>
+      <article class="bright">
+        <h1>Servicios que se ofrecen</h1>
+        
+        <div class="card-holder">
+          <article class="dark">
+            <h1>Cortes a la demanda:</h1>
+            <p>
+              servicio en el que se realizan los diferentes tipos de carne, según el peso y cantidad, necesitada por el cliente.
+              Este servicio se ofrece con una semana de anticipación
+            </p>
+          </article>
 
-                    <td> <IMG SRC="../images/cortes.jpg.jpg" WIDTH="100%" height="250px">
-                        <p class="white">Cortes a la demanda:<BR>
-                            servicio en el que se realizan los diferentes tipos de carne, según el peso y cantidad,
-                            necesitada por el cliente.<br> Este servicio se ofrece con una semana de anticipación
-                        </p>
-                    </td>
+          <article class="dark">
+            <h1>Catering:</h1>
+            <p>
+              servicio en el que se suministra la preparación de banquetes para celebraciones u ocasiones especiales.
+              Se ofrecen paquetes según el menú seleccionado y números de personas a atender.
+              Este servicio no incluye mantelería, cubertería ni mobiliario.
+            </p>
+          </article>
 
-                    <td><br><br><IMG SRC="../images/Catering.jpg.webp" WIDTH="100%" height="250px">
-                        <p class="white">Catering: <BR>
-                            servicio en el que se suministra la preparación de banquetes para celebraciones u ocasiones
-                            especiales.<br> Se ofrecen paquetes según el menú seleccionado y números de personas a
-                            atender.<br> Este servicio no incluye mantelería, cubertería ni mobiliario.</p>
-                    </td>
+          <article class="dark">
+            <h1>Pedidos:</h1>
+            <p>
+              servicio para mayoristas y al detalle de las carnes y embutidos de la Compañía.
+              Estos pedidos, en caso de mayoristas, se entregan en diferentes rutas de transporte 
+              que la Compañía tiene diseñadas,y en caso de ser ventas al detalle, se entregan 
+              en las sucursales
+            </p>
+          </article>
 
+          <article class="">
+            <h1>Restaurante y puntos de venta express:</h1>
+            <p>
+              "CARNES Y EMBUTIDOS EL PROGRESO", posee una sucursal de restaurante bajo la marca “El carnal” y tres puntos de venta express del producto sin cocinar, que llevan el mismo nombre:
+            </p>
 
+            <div class="card-holder">
+              <div class="card">
+                <h1>El Carnal, Antiguo Cuscatlán:</h1>
+                <p>
+                  En esta sucursal, se ofrece una variedad de platos, preparados 
+                  a la parrilla, en los que se utilizan los productos comercializados por EL PROGRESO.
+                </p>
+              </div>
 
+              <div class="card">
+                <h1>El Carnal, puntos de venta express:</h1>
+                <p>
+                  Ubicados en Nahuizalco, Apaneca y Sonsonate. Ofrecen todos 
+                  sus productos, para que el cliente los cocine.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </article>
+    </section>
+  </div>
 
-                    <td><IMG SRC="../images/pedidos.jpg.jpg" WIDTH="100%" height="250px">
-                        <p class="white">Pedidos: <BR>
-                            servicio para mayoristas y al detalle de las carnes y embutidos de la Compañía.<br> Estos
-                            pedidos, en caso de mayoristas, se entregan en diferentes rutas de transporte que la
-                            Compañía tiene diseñadas,y en caso de ser ventas al detalle, se entregan en las sucursales
-                        </p>
-                    </td>
-
-
-                    <td><br><br><br><br><br><IMG SRC="../images/restaurante.jpg.jpg" WIDTH="100%" height="250px">
-                        <p class="white">Restaurante y puntos de venta express:<BR>
-                            "CARNES Y EMBUTIDOS EL PROGRESO", posee una sucursal de restaurante bajo la marca “El
-                            carnal” y tres puntos de venta express del producto sin cocinar, que llevan el mismo
-                            nombre:<br>
-                            <br> El Carnal, Antiguo Cuscatlán: <br>
-                            En esta sucursal, se ofrece una variedad de platos, preparados a la parrilla, en los que se
-                            utilizan los productos comercializados por EL PROGRESO.<br>
-                            o El Carnal, puntos de venta express:<br>
-                            Ubicados en Nahuizalco, Apaneca y Sonsonate. Ofrecen todos sus productos, para que el
-                            cliente los cocine.<br>
-                        </p>
-                    </td>
-
-
-
-
-
-
-                </table>
-
-        <TR>
-            <TD COLSPAN="2" class="formato1">
-            </TD>
-        </TR>
-
-    </TABLE>
+  <footer class="dark">Copyright © Universidad Tecnológica</footer>
 </body>
-
 </html>
