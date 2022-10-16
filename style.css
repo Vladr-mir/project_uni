@@ -121,7 +121,8 @@ article {
 }
 
 .card {
-  background-color: white;
+  background-color: #F2F2F2;
+  color: #044040; 
   width: 225px;
   margin: 10px;
   height: 300px;
