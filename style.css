@@ -89,6 +89,10 @@ article {
 }
 
 /* Colors and basic styles */
+.white {
+  background-color: white;
+  color: #044040;
+}
 
 .bright {
   background-color: #F2F2F2;
@@ -121,7 +125,7 @@ article {
 }
 
 .card {
-  background-color: #F2F2F2;
+  /* background-color: #F2F2F2; */
   color: #044040; 
   width: 225px;
   margin: 10px;
