@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="form-style.css">
+  <script src="../../main.js" defer></script>
+  <title>Template</title>
+</head>
+<body>
+
+  <!-- Debug note: This form is not visible by itself. Only visible to update or edit bills -->
+
+  <!-- Titulo principal de la pagina -->
+  <header class="bright">
+    <p>EL PROGRESO</p>
+    <button onclick="location.href='about:blank'">Iniciar sesión</button>
+  </header>
+
+  <div class="page">
+    <!-- Barra de navegación izquierda -->
+    <nav>
+      <a href="">Inicio</a>
+      <a href="">Home</a>
+      <a href="">Productos</a>
+      <a href="">Servicios</a>
+      <a href="">Sobre nosotros</a>
+      <a href="">Ofertas</a>
+      <a href="">Tipos de cocina</a>
+      <a href="">Contactanos</a>
+    </nav>
+
+    <!-- En esta seccion se encuentra el contenido de la pagina -->
+    <section>
+      <!-- Formulario -->
+      <form action="">
+        <h1>Facturacion</h1>
+        <table>
+          <!-- row:1 -->
+          <tr>
+            <td>Factura:</td>
+            <td><input type="text" value=""></td>
+          </tr>
+
+          <!-- row:2 -->
+          <tr>
+            <td>fecha:</td>
+            <input type="date" name="" id="" disabled>
+          </tr>
+          
+          <!-- row:3 -->
+          <tr>
+            <td>Precio:</td>
+            <td><input type="text" name="" id=""></td>
+          </tr>
+
+          <!-- row:4 -->
+          <tr>
+            <td>Cantidad:</td>
+            <td><input type="number" name="" id=""></td>
+          </tr>
+
+          <!-- row:5 -->
+          <tr>
+            <td>detalles:</td>
+            <td>
+              <select name="" id="">
+                <option value="Codigo 1"></option>
+                <option value="Codigo 2"></option>
+                <option value="Codigo 3"></option>
+                <option value="Codigo 4"></option>
+              </select>
+            </td>
+          </tr>
+
+          <!-- row:6 -->
+          <tr>
+            <td colspan="2">
+              <input type="submit" value="Enviar">
+              <input type="reset" value="Empezar de nuevo">
+            </td>
+          </tr>
+        </table>
+      </form>
+    </section>
+  </div>
+
+  <footer class="dark">Copyright © Universidad Tecnológica</footer>
+</body>
+</html>
