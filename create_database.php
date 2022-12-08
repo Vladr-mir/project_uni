@@ -26,10 +26,10 @@
     $query = "CREATE TABLE `usuarios` (
       `idUsuario` INT AUTO_INCREMENT PRIMARY KEY,
       `username` VARCHAR(70) NOT NULL,
+      `email` VARCHAR(100) NOT NULL,
       `password` VARCHAR(255) NOT NULL,
       `nombre` VARCHAR(70) NOT NULL,
       `apellido` VARCHAR(100) NOT NULL,
-      `email` VARCHAR(100) NOT NULL,
       `telefono` VARCHAR(8) NOT NULL,
       `isActive` BIT default 1,
       `isAdmin` BIT default 0
