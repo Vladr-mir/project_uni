@@ -62,6 +62,7 @@
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
     $tables += mysqli_query($connection, $query);
 
+    // categories are for products
    $query = "CREATE TABLE `categorias`(
       `idCategoria` INT AUTO_INCREMENT PRIMARY KEY,
       `nombre` VARCHAR(200) NOT NULL,
