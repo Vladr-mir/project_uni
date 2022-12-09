@@ -102,6 +102,7 @@
     $query = "CREATE TABLE `facturas` (
       `numFactura` INT AUTO_INCREMENT PRIMARY KEY,
       `fecha` DATE NOT NULL,
+      `precio` DECIMAL(10, 2) NOT NULL,
 
       `idDetalleFactura` INT NOT NULL,
       `idUsuario` INT NOT NULL,
