@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="form-style.css">
   <script src="../../main.js" defer></script>
-  <title>Iniciar sesion</title>
+  <title>Clientes</title>
 </head>
 <body>
   <!-- Titulo principal de la pagina -->
@@ -16,7 +16,7 @@
     <button onclick="location.href='about:blank'">Iniciar sesión</button>
   </header>
 
-  <!-- Iniciar sesion -->
+  <!-- Crear usuarios -->
 
   <div class="page">
     <!-- Barra de navegación izquierda -->
@@ -34,19 +34,34 @@
     <!-- En esta seccion se encuentra el contenido de la pagina -->
     <section>
       <!-- Formulario -->
-      <form action="scripts/login.php" method="post">
-        <h1>Iniciar sesión</h1>
+      <form action="">
+        <h1>Formulario Clientes</h1>
         <table>
           <!-- row:1 -->
+
           <tr>
-            <td>Correo eléctronico:</td>
-            <td><input name="email" type="text" value="" placeholder="example@mail.com"></td>
+            <td>Nombre:</td>
+            <td><input type="Nombre" value=""></td>
           </tr>
 
-          <!-- row:3 -->
           <tr>
-            <td>Contraseña:</td>
-            <td><input name="password" type="password" id="" placeholder="*********"></td>
+            <td>Apellido:</td>
+            <td><input type="Apellido" value=""></td>
+          </tr>
+
+          <tr>
+            <td>Direccion:</td>
+            <td><input type="Direccion" value=""></td>
+          </tr>
+
+          <tr>
+            <td>Telefono:</td>
+            <td><input type="tel" value=""></td>
+          </tr>
+
+          <tr>
+            <td>Email:</td>
+            <td><input type="email" value=""></td>
           </tr>
 
           <!-- row:6 -->

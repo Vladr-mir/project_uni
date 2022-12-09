@@ -10,14 +10,14 @@
   <title>Template</title>
 </head>
 <body>
-
-  <!-- Debug NOTE: This form is not visible by itself. Only visible to update or edit bills -->
-
   <!-- Titulo principal de la pagina -->
   <header class="bright">
     <p>EL PROGRESO</p>
     <button onclick="location.href='about:blank'">Iniciar sesión</button>
   </header>
+  
+  <!-- Editar y desabilitar facturas -->
+  <!-- Debug NOTE: This form is not visible by itself. Only visible to update or edit bills -->
 
   <div class="page">
     <!-- Barra de navegación izquierda -->
@@ -41,38 +41,19 @@
           <!-- row:1 -->
           <tr>
             <td>Factura:</td>
-            <td><input type="text" value=""></td>
+            <td><input name="numFactura" type="text" placeholder="xxxxx" disabled></td>
           </tr>
 
           <!-- row:2 -->
           <tr>
             <td>fecha:</td>
-            <td><input type="date" name="" id="" disabled></td>
+            <td><input name="fecha" type="date" disabled></td>
           </tr>
           
           <!-- row:3 -->
           <tr>
             <td>Precio:</td>
-            <td><input type="text" name="" id=""></td>
-          </tr>
-
-          <!-- row:4 -->
-          <tr>
-            <td>Cantidad:</td>
-            <td><input type="number" name="" id=""></td>
-          </tr>
-
-          <!-- row:5 -->
-          <tr>
-            <td>detalles:</td>
-            <td>
-              <select name="" id="">
-                <option value="Codigo 1"></option>
-                <option value="Codigo 2"></option>
-                <option value="Codigo 3"></option>
-                <option value="Codigo 4"></option>
-              </select>
-            </td>
+            <td><input name="precio" type="text" placeholder="00.00$"></td>
           </tr>
 
           <!-- row:6 -->

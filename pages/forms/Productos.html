@@ -16,6 +16,8 @@
     <button onclick="location.href='about:blank'">Iniciar sesión</button>
   </header>
 
+  <!-- Añadir productos -->
+
   <div class="page">
     <!-- Barra de navegación izquierda -->
     <nav>
@@ -37,39 +39,45 @@
         <table>
           <!-- row:1 -->
           <tr>
-            <td>Nombre Producto:</td>
-            <td><input type="text" value=""></td>
+            <td>Nombre del producto:</td>
+            <td><input name="nombre" type="text" value=""></td>
           </tr>
 
           <!-- row:2 -->
           <tr>
-            <td>Precio Producto:</td>
-            <td><input type="number" name="" id=""></td>
+            <td>Precio:</td>
+            <td><input name="Precio" type="number" name=""></td>
           </tr>
 
           <!-- row:3 -->
           <tr>
             <td>Stock:</td>
-            <td><input type="text" name="" id=""></td>
+            <td><input name="stock" type="text" name="" id=""></td>
           </tr>
 
           <!-- row:4 -->
-
-  <tr>
-    <td>Categoria:  </td>
-    <td> <select name="Categoria" id="cat">
-    <optgroup label="Categorias">
-      <option value="Seleccione">Seleccione...</option>
-      <option value="Carne">Carne Res</option>
-      <option value="CarneCerdo">Carne Cerdo</option>
-      <option value="Embutidos">Embutidos</option>
-      <option value="tripas">Tripas</option>
-    </optgroup>
-  </select> </td>
-  </tr>
+          <tr>
+            <td>Categoria:</td>
+            <td>
+              <select name="categoria" id="">
+                <option value="1" selected>Carne</option>
+                <option value="2">Embutido</option>
+                <option value="3">Otros</option>
+              </select>
+            </td>
+          </tr>
 
           <!-- row:5 -->
-
+          <tr>
+            <td>Proveedor:</td>
+            <td>
+              <select name="proveedor" id="" pla>
+                <option value="1" selected>Proveedor 1</option>
+                <option value="2">Proveedor 2</option>
+                <option value="3">Otros 3</option>
+              </select>
+            </td>
+          </tr>
 
           <!-- row:6 -->
           <tr>
