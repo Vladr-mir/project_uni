@@ -33,35 +33,3 @@ form table {
 td {
   text-align: right;
 }
-
-input {
-  border-radius: 5px;
-  border: 2 px solid #044040;
-  color: #044040; 
-  font-size: 20px;
-}
-
-input[type=text]:focus {
-  border-radius: 5px;
-  border: 2 px solid black;
-  background-color: white;
-}
-
-input[type=submit]{
-  background-color: #F2F2F2;
-  transition-duration: 0.3s;
-  font-size: 20px;
-  border-radius: 8px;
-  border: 2px solid black;
-  padding: 10px;
-}
-
-input[type=reset]{
-  background-color: #8C1F28;
-  color: white;
-  transition-duration: 0.3s;
-  font-size: 20px;
-  border-radius: 8px;
-  border: 2px solid black;
-  padding: 10px;
-}
