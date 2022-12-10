@@ -14,12 +14,14 @@
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $query = "SELECT COUNT(*) as count FROM usuarios WHERE email = '$email' AND password = '$password';";
+    $query = "SELECT COUNT(*) as count, nombre FROM usuarios WHERE email = '$email' AND password = '$password';";
 
     $response = mysqli_fetch_array(mysqli_query($connection, $query));
     if ($response['count'] > 0) {
       $_SESSION['email'] = $email;
-      echo ('Datos correctos uwu');
+      $_SESSION['nombre'] = $response['nombre'];
+      header("Location: ../../user/userhomepage.php");
+      die();
     } else {
       echo ('Datos incorrectos');
     }
