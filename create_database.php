@@ -25,12 +25,11 @@
     // Create tables
     $query = "CREATE TABLE `usuarios` (
       `idUsuario` INT AUTO_INCREMENT PRIMARY KEY,
-      `username` VARCHAR(70) NOT NULL,
       `email` VARCHAR(100) NOT NULL,
-      `password` VARCHAR(255) NOT NULL,
       `nombre` VARCHAR(70) NOT NULL,
       `apellido` VARCHAR(100) NOT NULL,
-      `telefono` VARCHAR(8) NOT NULL,
+      `password` VARCHAR(255) NOT NULL,
+      `telefono` VARCHAR(8),
       `isActive` BIT default 1,
       `isAdmin` BIT default 0
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
@@ -137,6 +136,11 @@
       ADD CONSTRAINT `factura_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios`(`idUsuario`),
       ADD CONSTRAINT `factura_ibfk_3` FOREIGN KEY (`idOrden`) REFERENCES `ordenes`(`idOrden`);";
     $relationships += mysqli_query($connection, $query);
+
+    $query = "INSERT INTO `usuarios` (`idUsuario`, `email`, `nombre`, `apellido`, `password`, `telefono`, `isActive`, `isAdmin`)
+      VALUES (NULL, 'root@mail.com', 'root', 'root', '123', NULL, b'1', b'1');";
+    mysqli_query($connection, $query);
+
     mysqli_close($connection);
   ?> 
 
