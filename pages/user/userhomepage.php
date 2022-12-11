@@ -47,14 +47,14 @@
           <div class="card white">
             <h1>Ir a la tienda</h1>
             <p>La tienda donde puedes comprar carnes y embutidos</p>
-            <form action="buyitem.php"><input type="submit" value="Comprar"></form>
+            <form action="store.php"><input type="submit" value="Comprar"></form>
          </div>
 
           <!-- Carta para ir al formulario de edicion de usuario -->
           <div class="card white">
             <h1>Editar usuario</h1>
             <p>Aqui puedes editar tu usuario</p>
-            <form action="buyitem.php"><input type="submit" value="Comprar"></form>
+            <form action="store.php"><input type="submit" value="Comprar"></form>
           </div>
         </div>
       </article>
