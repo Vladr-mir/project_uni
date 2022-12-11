@@ -11,6 +11,12 @@
     require('connect.php');
     session_start();
 
+    if($_SESSION['nombre'] != null) {
+      header('Location: ../../user/userhomepage.php');
+    } else {
+      header('Location: ../login.html');
+    }
+
     $email = $_POST['email'];
     $password = $_POST['password'];
 
