@@ -36,7 +36,7 @@
     $tables += mysqli_query($connection, $query);
 
     $query = "CREATE TABLE `proveedores` (
-     `idProveedor` INT AUTO_INCREMENT PRIMARY KEY,
+      `idProveedor` INT AUTO_INCREMENT PRIMARY KEY,
       `nombre` VARCHAR(200) NOT NULL,
       `telefono` VARCHAR(8) NOT NULL,
       `email` VARCHAR(100) NOT NULL,

@@ -86,7 +86,7 @@
               <!-- row:6 -->
               <tr>
                 <td colspan="2">
-                  <input type="submit" value="Enviar">
+                  <input type="submit" value="Actualizar">
                   <input type="reset" value="Empezar de nuevo">
               </td>
             </tr>

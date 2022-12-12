@@ -13,8 +13,23 @@
   <!-- Titulo principal de la pagina -->
   <header class="bright">
     <p>EL PROGRESO</p>
-    <button onclick="location.href='../scripts/login.php'">Iniciar sesión</button>
+    <button onclick="location.href='../user/userhomepage.php'">Volver</button>
   </header>
+
+  <?php
+    require('../user/manager.php');
+    session_start();
+
+    if (!isConnected()) {
+      header('Location: login.html');
+      die();
+    }
+
+    if(!isAdmin(getUserID($_SESSION['email']))) {
+      header('Location: ../userhomepage.php');
+      die();
+    }
+  ?>
 
   <!-- Categoria de productos-->
 
@@ -33,19 +48,19 @@
     <!-- En esta seccion se encuentra el contenido de la pagina -->
     <section>
       <!-- Formulario -->
-      <form action="">
+      <form action="../scripts/categoryhandler.php">
         <h1>Categoria</h1>
         <table>
           <!-- row:1 -->
           <tr>
             <td>Nombre de Categoria:</td>
-            <td><input type="text" placeholder="embutidos"></td>
+            <td><input type="text" name="nombre" placeholder="embutidos"></td>
           </tr>
 
           <!-- row:2 -->
           <tr>
             <td>Descripcion:</td>
-            <td><input type="text"></td>
+            <td><input type="text" name="descripcion" placeholder="breve descripción"></td>
           </tr>
 
           <!-- row:3 -->
