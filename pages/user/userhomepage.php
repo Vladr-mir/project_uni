@@ -30,13 +30,12 @@
 
     <!-- En esta seccion se encuentra el contenido de la pagina -->
     <section>
-      <article>
+      <article class="bright">
         <?php
+          require('manager.php');
           session_start();
 
-          if ($_SESSION['nombre'] == null) {
-            header('Location: ../forms/login.html');
-          }
+          if (!isConnected()) {header('Location: ../forms/login.html');}
 
           $username = $_SESSION['nombre'];
           echo ("<h1>Bienvenido: $username</h1>");
@@ -53,8 +52,8 @@
           <!-- Carta para ir al formulario de edicion de usuario -->
           <div class="card white">
             <h1>Editar usuario</h1>
-            <p>Aqui puedes editar tu usuario</p>
-            <form action="store.php"><input type="submit" value="Comprar"></form>
+            <p>Aqui puedes editar los datos de tu usuario</p>
+            <form action="edituser.php"><input type="submit" value="Editar"></form>
           </div>
         </div>
       </article>

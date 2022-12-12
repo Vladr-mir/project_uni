@@ -12,7 +12,7 @@
   <!-- Titulo principal de la pagina -->
   <header class="bright">
     <p>EL PROGRESO</p>
-    <button onclick="location.href='about:blank'">Iniciar sesión</button>
+    <button onclick="location.href='userhomepage.php'">Volver</button>
   </header>
 
   <div class="page">

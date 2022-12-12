@@ -12,17 +12,18 @@
     session_start();
 
     if($_SESSION['nombre'] != null) {
-      header('Location: ../../user/userhomepage.php');
+      header('Location: ../user/userhomepage.php');
     } else {
-      header('Location: ../login.html');
+      header('Location: ../forms/login.html');
     }
 
     $email = $_POST['email'];
     $password = $_POST['password'];
 
     $query = "SELECT COUNT(*) as count, nombre FROM usuarios WHERE email = '$email' AND password = '$password';";
-
+    $connection = connectDB();
     $response = mysqli_fetch_array(mysqli_query($connection, $query));
+    mysqli_close($connection);
     if ($response['count'] > 0) {
       $_SESSION['email'] = $email;
       $_SESSION['nombre'] = $response['nombre'];
