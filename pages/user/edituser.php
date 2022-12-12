@@ -43,58 +43,59 @@
       $name = $userData['nombre'];
       $lastname = $userData['apellido'];
       $password = $userData['password'];
-      $cellphone = $userData['telefono'];
+      $phone = $userData['telefono'];
     ?>
     <!-- En esta seccion se encuentra el contenido de la pagina -->
     <section>
       <!-- Formulario -->
-      <article>
-        <form action="">
-          <h1>Formulario Clientes</h1>
-          <table>
-            <!-- row:1 -->
-            <tr>
-              <td>Email:</td>
-              <td><input name="email" type="email" value="<?php echo("$email") ?>" disabled></td>
+      <article class="bright">
+        <h1>Editar usuarios</h1>
+        <div class="paper-holder">
+          <form action="../scripts/userhandler.php" method="post" class="paper white">
+            <table>
+              <!-- row:1 -->
+              <tr>
+                <td>Email:</td>
+                <td><input name="email" type="email" value="<?php echo("$email") ?>" disabled></td>
+              </tr>
+  
+              <!-- row:2 -->
+              <tr>
+                <td>Contraseña:</td>
+                <td><input name="password" type="text" value="<?php echo("$password") ?>"></td>
+              </tr>
+  
+              <!-- row:3 -->
+              <tr>
+                <td>Nombre:</td>
+                <td><input name="name" type="text" value="<?php echo("$name") ?>"></td>
+              </tr>
+  
+              <!-- row:4 -->
+              <tr>
+                <td>Apellido:</td>
+                <td><input name="lastname" type="text" value="<?php echo("$lastname") ?>"></td>
+              </tr>
+  
+              <!-- row:5 -->
+              <tr>
+                <td>Telefono:</td>
+                <td><input name="phone" type="tel" value="<?php echo("$phone") ?>"></td>
+              </tr>
+  
+              <!-- row:6 -->
+              <tr>
+                <td colspan="2">
+                  <input type="submit" value="Enviar">
+                  <input type="reset" value="Empezar de nuevo">
+              </td>
             </tr>
-
-            <!-- row:2 -->
-            <tr>
-              <td>Contraseña:</td>
-              <td><input name="password" type="text" value="<?php echo("$password") ?>"></td>
-            </tr>
-
-            <!-- row:3 -->
-            <tr>
-              <td>Nombre:</td>
-              <td><input name="name" type="text" value="<?php echo("$name") ?>"></td>
-            </tr>
-
-            <!-- row:4 -->
-            <tr>
-              <td>Apellido:</td>
-              <td><input name="lastname" type="text" value="<?php echo("$lastname") ?>"></td>
-            </tr>
-
-            <!-- row:5 -->
-            <tr>
-              <td>Telefono:</td>
-              <td><input name="celphone" type="tel" value="<?php echo("$cellphone") ?>"></td>
-            </tr>
-
-            <!-- row:6 -->
-            <tr>
-              <td colspan="2">
-                <input type="submit" value="Enviar">
-                <input type="reset" value="Empezar de nuevo">
-            </td>
-          </tr>
-        </table>
-      </form>
+          </table>
+        </form>
+        </div>
       </article>
     </section>
   </div>
-
   <footer class="dark">Copyright © Universidad Tecnológica</footer>
 </body>
 </html>

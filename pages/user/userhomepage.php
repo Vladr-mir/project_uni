@@ -12,7 +12,7 @@
     <!-- Titulo principal de la pagina -->
     <header class="bright">
       <p>EL PROGRESO</p>
-      <form action="../forms/scripts/close_session.php"><input type="submit" value="Cerrar session"></form>
+      <form action="../scripts/close_session.php"><input type="submit" value="Cerrar session"></form>
       <!-- <button onclick="location.href='about:blank'">Cerrar sesion</button> -->
   </header>
   
@@ -35,7 +35,10 @@
           require('manager.php');
           session_start();
 
-          if (!isConnected()) {header('Location: ../forms/login.html');}
+          if (!isConnected()) {
+            header('Location: ../forms/login.html');
+            die();
+          }
 
           $username = $_SESSION['nombre'];
           echo ("<h1>Bienvenido: $username</h1>");
@@ -55,6 +58,18 @@
             <p>Aqui puedes editar los datos de tu usuario</p>
             <form action="edituser.php"><input type="submit" value="Editar"></form>
           </div>
+
+          <?php
+            $id = getUserID($_SESSION['email']);
+            
+            if(isAdmin($id)) {
+              echo ('<div class="card white">');
+              echo ("<h1>Administrador</h1>");
+              echo ("<p>Aquí podra acceder a opciones de administrador</p>");
+              echo ('<form action="edituser.php"><input type="submit" value="Acceder"></form>');
+              echo ("</div>");
+            }
+          ?>
         </div>
       </article>
     </section>

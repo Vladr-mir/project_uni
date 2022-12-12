@@ -27,7 +27,7 @@
     if ($response['count'] > 0) {
       $_SESSION['email'] = $email;
       $_SESSION['nombre'] = $response['nombre'];
-      header("Location: ../../user/userhomepage.php");
+      header("Location: ../user/userhomepage.php");
       die();
     } else {
       echo ('Datos incorrectos');
