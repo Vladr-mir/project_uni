@@ -44,12 +44,12 @@
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
     $tables += mysqli_query($connection, $query);
 
-    $query = "CREATE TABLE `vendedores` (
-      `idVendedor` INT AUTO_INCREMENT PRIMARY KEY,
+    $query = "CREATE TABLE `sucursales` (
+      `idSucursal` INT AUTO_INCREMENT PRIMARY KEY,
       `nombre` VARCHAR(70) NOT NULL,
-      `apellido` VARCHAR(100) NOT NULL,
       `telefono` VARCHAR(8) NOT NULL,
-      `email` VARCHAR(100) NOT NULL,
+      `direccion` VARCHAR(100) NOT NULL,
+      `email` VARCHAR(100),
       `isActive` BIT default 1
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
     $tables += mysqli_query($connection, $query);
@@ -94,7 +94,7 @@
     $query = "CREATE TABLE `detalleFacturas`(
       `idDetalleFactura` INT PRIMARY KEY,
 
-      `idVendedor` INT NOT NULL,
+      `idSucursal` INT NOT NULL,
       `idModo` INT NOT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
     $tables += mysqli_query($connection, $query);
@@ -127,7 +127,7 @@
     $relationships += mysqli_query($connection, $query);
 
     $query = "ALTER TABLE `detalleFacturas` 
-      ADD CONSTRAINT `detalle_ibfk_1` FOREIGN KEY (`idVendedor`) REFERENCES `vendedores`(`idVendedor`),
+      ADD CONSTRAINT `detalle_ibfk_1` FOREIGN KEY (`idSucursal`) REFERENCES `sucursales`(`idSucursal`),
       ADD CONSTRAINT `detalle_ibfk_2` FOREIGN KEY (`idModo`) REFERENCES `modoPagos`(`idModo`);";
     $relationships += mysqli_query($connection, $query);
 
