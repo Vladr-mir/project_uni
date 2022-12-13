@@ -54,20 +54,39 @@
           <div class="card white">
             <h1>Añadir categoria</h1>
             <p>En esta sección podrá añadir categorías</p>
-            <form action="../forms/categoria.php"><input type="submit" value="Añadir"></form>
+            <form action="../forms/categoria.php"><input type="submit" value="Añadir categorias"></form>
          </div>
 
           <!-- Carta para ir al formulario de edicion de usuario -->
           <div class="card white">
             <h1>Añadir Proveedores</h1>
             <p>En esta sección podra añadir proveedores</p>
-            <form action="../forms/proveedores.php"><input type="submit" value="Añadir"></form>
+            <form action="../forms/proveedores.php"><input type="submit" value="Añadir proveedores"></form>
           </div>
 
           <div class="card white">
             <h1>Añadir Productos</h1>
             <p>En esta sección podra añadir productos</p>
-            <form action="../forms/productos.php"><input type="submit" value="Añadir"></form>
+            <form action="../forms/productos.php"><input type="submit" value="Añadir productos"></form>
+            <p>*Para realizar esta operacion es necesario al menos tener una categoria y un proveedor*</p>
+          </div>
+
+          <div class="card white">
+            <h1>Añadir sucursal</h1>
+            <p>En esta sección podra añadir los nombres de las sucursales</p>
+            <form action="../forms/sucursal.php"><input type="submit" value="Añadir sucursales"></form>
+          </div>
+          
+          <div class="card white">
+            <h1>Añadir stock</h1>
+            <p>En esta sección podrá buscar y añadir stock de productos</p>
+            <form action="../forms/sucursal.php"><input type="submit" value="Añadir stock"></form>
+          </div>
+
+          <div class="card white">
+            <h1>Inhabilitar facturas</h1>
+            <p>En esta sección podrá buscar y deshabilitar facturas</p>
+            <form action="../forms/sucursal.php"><input type="submit" value="Inhabilitar facturas"></form>
           </div>
         </div>
       </article>
