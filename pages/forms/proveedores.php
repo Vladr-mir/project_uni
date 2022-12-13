@@ -13,8 +13,23 @@
   <!-- Titulo principal de la pagina -->
   <header class="bright">
     <p>EL PROGRESO</p>
-    <button onclick="location.href='about:blank'">Iniciar sesión</button>
+    <button onclick="location.href='../user/admin.php'">Volver</button>
   </header>
+
+  <?php
+    require('../user/manager.php');
+    session_start();
+
+    if (!isConnected()) {
+      header('Location: login.html');
+      die();
+    }
+
+    if(!isAdmin(getUserID($_SESSION['email']))) {
+      header('Location: ../userhomepage.php');
+      die();
+    }
+  ?>
 
   <!-- Crear y editar proveedores -->
 
@@ -33,18 +48,13 @@
     <!-- En esta seccion se encuentra el contenido de la pagina -->
     <section>
       <!-- Formulario -->
-      <form action="">
+      <form action="../scripts/proveedorhandler.php" method="POST">
         <h1>Añadir proveedor</h1>
         <table>
           <!-- row:1 -->
           <tr>
             <td>Nombre del proveedor:</td>
             <td><input name="nombre" type="text" placeholder="Nombre"></td>
-          </tr>
-
-          <tr>
-            <td>Apellido:</td>
-            <td><input name="apellido" type="text" placeholder="Apellido"></td>
           </tr>
 
           <tr>

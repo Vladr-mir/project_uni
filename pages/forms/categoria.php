@@ -13,7 +13,7 @@
   <!-- Titulo principal de la pagina -->
   <header class="bright">
     <p>EL PROGRESO</p>
-    <button onclick="location.href='../user/userhomepage.php'">Volver</button>
+    <button onclick="location.href='../user/admin.php'">Volver</button>
   </header>
 
   <?php
@@ -48,7 +48,7 @@
     <!-- En esta seccion se encuentra el contenido de la pagina -->
     <section>
       <!-- Formulario -->
-      <form action="../scripts/categoryhandler.php">
+      <form action="../scripts/categoryhandler.php" method="POST">
         <h1>Categoria</h1>
         <table>
           <!-- row:1 -->

@@ -33,43 +33,43 @@
     <!-- En esta seccion se encuentra el contenido de la pagina -->
     <section>
       <!-- Formulario -->
-      <form action="">
-        <h1>Formulario Clientes</h1>
+      <form action="../scripts/createUser.php" method="POST">
+        <h1>Crear usuario</h1>
         <table>
           <!-- row:1 -->
           <tr>
             <td>Email:</td>
-            <td><input type="Direccion" value=""></td>
+            <td><input type="email" name="email" placeholder="example@mail.com"></td>
           </tr>
 
           <!-- row:2 -->
           <tr>
             <td>Contraseña:</td>
-            <td><input type="password" value=""></td>
+            <td><input type="password" name="password" placeholder="Contraseña"></td>
           </tr>
 
           <!-- row:3 -->
           <tr>
             <td>Nombre:</td>
-            <td><input type="Nombre" value=""></td>
+            <td><input type="text" name="nombre" placeholder="Nombre"></td>
           </tr>
 
           <!-- row:4 -->
           <tr>
             <td>Apellido:</td>
-            <td><input type="Apellido" value=""></td>
+            <td><input type="text" name="apellido" placeholder="Apellido"></td>
           </tr>
 
           <!-- row:5 -->
           <tr>
             <td>Telefono:</td>
-            <td><input type="tel" value=""></td>
+            <td><input type="tel" name="telefono" placeholder="00000000"></td>
           </tr>
 
           <!-- row:6 -->
           <tr>
             <td colspan="2">
-              <input type="submit" value="Enviar">
+              <input type="submit" value="Crear">
               <input type="reset" value="Empezar de nuevo">
             </td>
           </tr>

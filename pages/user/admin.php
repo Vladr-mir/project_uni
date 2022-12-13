@@ -53,15 +53,21 @@
         <div class="card-holder">
           <div class="card white">
             <h1>Añadir categoria</h1>
-            <p>En esta seccion podrá añadir categorías</p>
+            <p>En esta sección podrá añadir categorías</p>
             <form action="../forms/categoria.php"><input type="submit" value="Añadir"></form>
          </div>
 
           <!-- Carta para ir al formulario de edicion de usuario -->
           <div class="card white">
             <h1>Añadir Proveedores</h1>
-            <p>Aqui puedes editar los datos de tu usuario</p>
-            <form action="edituser.php"><input type="submit" value="Editar"></form>
+            <p>En esta sección podra añadir proveedores</p>
+            <form action="../forms/proveedores.php"><input type="submit" value="Añadir"></form>
+          </div>
+
+          <div class="card white">
+            <h1>Añadir Productos</h1>
+            <p>En esta sección podra añadir productos</p>
+            <form action="../forms/productos.php"><input type="submit" value="Añadir"></form>
           </div>
         </div>
       </article>

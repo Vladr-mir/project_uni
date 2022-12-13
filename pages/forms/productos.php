@@ -13,8 +13,23 @@
   <!-- Titulo principal de la pagina -->
   <header class="bright">
     <p>EL PROGRESO</p>
-    <button onclick="location.href='../scripts/login.php'">Iniciar sesión</button>
+    <button onclick="location.href='../user/admin.php'">Volver</button>
   </header>
+
+  <?php
+    require('../user/manager.php');
+    session_start();
+
+    if (!isConnected()) {
+      header('Location: login.html');
+      die();
+    }
+
+    if(!isAdmin(getUserID($_SESSION['email']))) {
+      header('Location: ../userhomepage.php');
+      die();
+    }
+  ?>
 
   <!-- Añadir productos -->
 
@@ -33,35 +48,47 @@
     <!-- En esta seccion se encuentra el contenido de la pagina -->
     <section>
       <!-- Formulario -->
-      <form action="">
+      <form action="../scripts/productoshandler.php" method="POST">
         <h1>Productos</h1>
         <table>
           <!-- row:1 -->
           <tr>
             <td>Nombre del producto:</td>
-            <td><input name="nombre" type="text" value=""></td>
+            <td><input name="nombre" type="text" placeholder="Producto"></td>
           </tr>
 
           <!-- row:2 -->
           <tr>
             <td>Precio:</td>
-            <td><input name="Precio" type="number" name=""></td>
+            <td><input name="precio" type="text" placeholder="Precio"></td>
           </tr>
 
           <!-- row:3 -->
           <tr>
             <td>Stock:</td>
-            <td><input name="stock" type="text" name="" id=""></td>
+            <td><input name="stock" type="number" placeholder="1"></td>
           </tr>
 
           <!-- row:4 -->
           <tr>
             <td>Categoria:</td>
             <td>
-              <select name="categoria" id="">
-                <option value="1" selected>Carne</option>
-                <option value="2">Embutido</option>
-                <option value="3">Otros</option>
+              <select name="categoria">
+                <?php
+                  $connection = connectDB();
+
+                  $query = "SELECT `idCategoria`, `nombre` FROM `categorias`";
+                  $result = mysqli_query($connection, $query);
+                  mysqli_close($connection);
+
+                  while ($row_cat = mysqli_fetch_assoc($result)) {
+                    $category[] = $row_cat;
+                  }
+
+                  foreach($category as $row) {
+                    echo "<option value=\"".$row['idCategoria']."\">".$row['nombre']."</option>";
+                  }
+                ?>
               </select>
             </td>
           </tr>
@@ -70,10 +97,22 @@
           <tr>
             <td>Proveedor:</td>
             <td>
-              <select name="proveedor" id="" pla>
-                <option value="1" selected>Proveedor 1</option>
-                <option value="2">Proveedor 2</option>
-                <option value="3">Otros 3</option>
+              <select name="proveedor">
+                <?php
+                  $connection = connectDB();
+
+                  $query = "SELECT `idProveedor`, `nombre` FROM `proveedores`";
+                  $result = mysqli_query($connection, $query);
+                  mysqli_close($connection);
+
+                  while ($row_prov = mysqli_fetch_assoc($result)) {
+                    $proveedor[] = $row_prov;
+                  }
+
+                  foreach($proveedor as $row) {
+                    echo "<option value=\"".$row['idProveedor']."\">".$row['nombre']."</option>";
+                  }
+                ?>
               </select>
             </td>
           </tr>
