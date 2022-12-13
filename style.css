@@ -96,6 +96,10 @@ input[type=text] {
   width: 75%;
 }
 
+input[type=password] {
+  width: 75%;
+}
+
 input[type=tel] {
   width: 75%;
 }
