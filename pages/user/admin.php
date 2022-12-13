@@ -78,9 +78,9 @@
           </div>
           
           <div class="card white">
-            <h1>Añadir stock</h1>
-            <p>En esta sección podrá buscar y añadir stock de productos</p>
-            <form action="../forms/sucursal.php"><input type="submit" value="Añadir stock"></form>
+            <h1>Editar stock</h1>
+            <p>En esta sección podrá buscar y editar stock de productos</p>
+            <form action="../forms/add_stock.php"><input type="submit" value="Añadir stock"></form>
           </div>
 
           <div class="card white">
