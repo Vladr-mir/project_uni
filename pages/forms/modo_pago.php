@@ -39,7 +39,7 @@
           <!-- row:3 -->
           <tr>
             <td>Tipo de pago:</td>
-            <td><input type="modoPago" name="" id="" placeholder="Tipo de pago"></td>
+            <td><input type="modoPago" name="modo" id="" placeholder="Tipo de pago"></td>
           </tr>
 
           <!-- row:2 -->

@@ -2,7 +2,7 @@
 
 require('connect.php');
 
-$tipo = $_POST['tipoPago'];
+$tipo = $_POST['modo'];
 
 $connection = connectDB();
 $query = "INSERT INTO `modoPagos` (`tipoPago`) VALUES ('$tipo');";

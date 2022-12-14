@@ -10,7 +10,7 @@ $telefono = $_POST['telefono'];
 
 $connection = connectDB();
 $query = "INSERT INTO `usuarios` (`email`, `nombre`, `apellido`, `password`)
-VALUES ('$email', '$nombre', '$apellido', $password);";
+VALUES ('$email', '$nombre', '$apellido', '$password');";
 
 $result = mysqli_query($connection, $query);
 

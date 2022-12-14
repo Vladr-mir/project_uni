@@ -87,12 +87,13 @@
       `numeroProducto` INT NOT NULL,
 
       `idProducto` INT NOT NULL,
+      `cuantity` INT default 0,
       PRIMARY KEY(idOrden, numeroProducto)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
     $tables += mysqli_query($connection, $query);
 
     $query = "CREATE TABLE `detalleFacturas`(
-      `idDetalleFactura` INT PRIMARY KEY,
+      `idDetalleFactura` INT AUTO_INCREMENT PRIMARY KEY,
 
       `idSucursal` INT NOT NULL,
       `idModo` INT NOT NULL

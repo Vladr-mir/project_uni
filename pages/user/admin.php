@@ -84,15 +84,10 @@
           </div>
 
           <div class="card white">
-            <h1>Ver facturas</h1>
-            <p>En esta sección podrá buscar y deshabilitar facturas</p>
-            <form action="../forms/sucursal.php"><input type="submit" value="Ver facturas"></form>
-          </div>
-
-          <div class="card white">
             <h1>Añadir metodo de pago</h1>
             <p>En esta sección podrá añadir metodos de pago</p>
             <form action="../forms/modo_pago.php"><input type="submit" value="Añadir modo de pago"></form>
+            <p>*Es importante añadir como minimo un metodo de pago para que el sistema funcione*</p>
           </div>
         </div>
       </article>

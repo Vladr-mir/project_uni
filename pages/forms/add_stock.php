@@ -67,7 +67,7 @@
               echo("<p>El stock actual es de: ".$row['stock']." Unidades</p>");
               echo("<form action=\"../scripts/stockhandler.php\" method=\"POST\">");
               // $_POST['id'] = $row['idProducto'];
-              echo("<input type=\"text\" name=\"id\" value=\"".$row['idProducto']."\" style=\"display: none;\">");
+              echo("<input type=\"hidden\" name=\"id\" value=\"".$row['idProducto']."\">");
               echo("<input type=\"number\" name=\"stock\" value=\"".$row['stock']."\">");
               echo ("</br>");
               echo ("</br>");
