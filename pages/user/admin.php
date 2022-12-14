@@ -78,15 +78,21 @@
           </div>
           
           <div class="card white">
-            <h1>Editar stock</h1>
-            <p>En esta sección podrá buscar y editar stock de productos</p>
-            <form action="../forms/add_stock.php"><input type="submit" value="Añadir stock"></form>
+            <h1>Inventario</h1>
+            <p>En esta sección podrá ver y editar stock de productos</p>
+            <form action="../forms/add_stock.php"><input type="submit" value="Ver inventario"></form>
           </div>
 
           <div class="card white">
-            <h1>Inhabilitar facturas</h1>
+            <h1>Ver facturas</h1>
             <p>En esta sección podrá buscar y deshabilitar facturas</p>
-            <form action="../forms/sucursal.php"><input type="submit" value="Inhabilitar facturas"></form>
+            <form action="../forms/sucursal.php"><input type="submit" value="Ver facturas"></form>
+          </div>
+
+          <div class="card white">
+            <h1>Añadir metodo de pago</h1>
+            <p>En esta sección podrá añadir metodos de pago</p>
+            <form action="../forms/modo_pago.php"><input type="submit" value="Añadir modo de pago"></form>
           </div>
         </div>
       </article>
