@@ -8,14 +8,14 @@
 </head>
 <body>
  <?php
-    // Connect to database
-    $hostname = "localhost";
-    $username = "root";
+    // TODO: Finish the primary keys and fk constraints
     $database = "bdelprogreso";
     $tables = 0;
     $relationships = 0;
 
-    $connection = mysqli_connect($hostname, $username, "");
+    require('./pages/scripts/connect.php');
+    createDB();
+    $connection = connectDB();
 
     // Create database
     $query = "CREATE DATABASE IF NOT EXISTS $database;";
@@ -23,99 +23,120 @@
     mysqli_select_db($connection, $database);
 
     // Create tables
-    $query = "CREATE TABLE `usuarios` (
-      `idUsuario` INT AUTO_INCREMENT PRIMARY KEY,
-      `email` VARCHAR(100) NOT NULL,
-      `nombre` VARCHAR(70) NOT NULL,
-      `apellido` VARCHAR(100) NOT NULL,
-      `password` VARCHAR(255) NOT NULL,
-      `telefono` VARCHAR(8),
-      `isActive` BIT default 1,
-      `isAdmin` BIT default 0
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+    $query = "CREATE TABLE `categorias` (
+      `idCategoria` int(11) NOT NULL,
+      `nombre` varchar(50) NOT NULL,
+      `descripcion` varchar(100) NOT NULL,
+      `isActive` bit(1) DEFAULT b'1'
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
     $tables += mysqli_query($connection, $query);
 
-    $query = "CREATE TABLE `proveedores` (
-      `idProveedor` INT AUTO_INCREMENT PRIMARY KEY,
-      `nombre` VARCHAR(200) NOT NULL,
-      `telefono` VARCHAR(8) NOT NULL,
-      `email` VARCHAR(100) NOT NULL,
-      `isActive` BIT default 1
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+    $query = "CREATE TABLE `clientes` (
+      `idCliente` int(11) NOT NULL,
+      `nombres` varchar(60) NOT NULL,
+      `apellidos` varchar(60) NOT NULL,
+      `direccion` varchar(300) NOT NULL,
+      `telefono` varchar(8) NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
     $tables += mysqli_query($connection, $query);
 
-    $query = "CREATE TABLE `sucursales` (
-      `idSucursal` INT AUTO_INCREMENT PRIMARY KEY,
-      `nombre` VARCHAR(70) NOT NULL,
-      `telefono` VARCHAR(8) NOT NULL,
-      `direccion` VARCHAR(100) NOT NULL,
-      `email` VARCHAR(100),
-      `isActive` BIT default 1
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+    $query = "CREATE TABLE `delivery` (
+      `idDelivery` int(11) NOT NULL,
+      `nombres` varchar(60) NOT NULL,
+      `apellidos` varchar(60) NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
     $tables += mysqli_query($connection, $query);
 
-    $query = "CREATE TABLE `modoPagos`(
-      `idModo` INT AUTO_INCREMENT PRIMARY KEY,
-      `tipoPago` VARCHAR(25) NOT NULL,
-      `isActive` BIT default 1
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+    $query = "CREATE TABLE `detalleordenes` (
+      `idNumeroDeOrden` int(11) NOT NULL,
+      `idNumProducto` int(11) NOT NULL,
+      `idProducto` int(11) NOT NULL,
+      `cantidad` int(11) NOT NULL,
+      `precio` double(10,2) NOT NULL,
+      `numeroDocumento` varchar(8) NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
     $tables += mysqli_query($connection, $query);
 
     // categories are for products
-   $query = "CREATE TABLE `categorias`(
-      `idCategoria` INT AUTO_INCREMENT PRIMARY KEY,
-      `nombre` VARCHAR(200) NOT NULL,
-      `descripcion` VARCHAR(200) NOT NULL,
-      `isActive` BIT default 1
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+   $query = "CREATE TABLE `facturas` (
+      `numFactura` int(11) NOT NULL,
+      `fecha` date NOT NULL,
+      `total` decimal(10,2) NOT NULL,
+      `direccion` varchar(300) NOT NULL,
+      `idUsuario` int(11) NOT NULL,
+      `idOrden` int(11) NOT NULL,
+      `idSucursal` int(11) NOT NULL,
+      `idModoPago` int(11) NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
     $tables += mysqli_query($connection, $query);
 
-   $query = "CREATE TABLE `productos`(
-      `idProducto` INT AUTO_INCREMENT PRIMARY KEY,
-      `nombre` VARCHAR(200) NOT NULL,
-      `precio` DECIMAL(10,2) NOT NULL,
-      `stock` INT NOT NULL,
-      `isActive` BIT default 1,
-
-      `idCategoria` INT NOT NULL,
-      `idProveedor` INT NOT NULL
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+   $query = "CREATE TABLE `modopagos` (
+      `idModo` int(11) NOT NULL,
+      `tipoPago` varchar(25) NOT NULL,
+      `isActive` bit(1) DEFAULT b'1'
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
     $tables += mysqli_query($connection, $query);
 
-    $query = "CREATE TABLE `ordenes`(
-      `idOrden` INT NOT NULL,
-      `numeroProducto` INT NOT NULL,
-
-      `idProducto` INT NOT NULL,
-      `cuantity` INT default 0,
-      PRIMARY KEY(idOrden, numeroProducto)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+    $query = "CREATE TABLE `ordenes` (
+      `idOrden` int(11) NOT NULL,
+      `total` double(10,2) NOT NULL,
+      `formaDePago` int(11) NOT NULL,
+      `fecha` date NOT NULL,
+      `Hora` datetime NOT NULL,
+      `numeroDocumento` varchar(8) NOT NULL,
+      `idDelivery` int(11) NOT NULL,
+      `numeroDeOrden` int(11) NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
     $tables += mysqli_query($connection, $query);
 
-    $query = "CREATE TABLE `detalleFacturas`(
-      `idDetalleFactura` INT AUTO_INCREMENT PRIMARY KEY,
-
-      `idSucursal` INT NOT NULL,
-      `idModo` INT NOT NULL
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+    $query = "CREATE TABLE `productos` (
+      `idProducto` int(11) NOT NULL,
+      `nombre` varchar(200) NOT NULL,
+      `precio` decimal(10,2) NOT NULL,
+      `stock` int(11) NOT NULL,
+      `isActive` bit(1) DEFAULT b'1',
+      `idCategoria` int(11) NOT NULL,
+      `idProveedor` int(11) NOT NULL,
+      `idUnidad` int(11) NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
     $tables += mysqli_query($connection, $query);
 
-    $query = "CREATE TABLE `facturas` (
-      `numFactura` INT AUTO_INCREMENT PRIMARY KEY,
-      `fecha` DATE NOT NULL,
-      `precio` DECIMAL(10, 2) NOT NULL,
+    $query = "CREATE TABLE `proveedores` (
+      `idProveedor` int(11) NOT NULL,
+      `nombre` varchar(200) NOT NULL,
+      `telefono` varchar(8) NOT NULL,
+      `email` varchar(100) NOT NULL,
+      `isActive` bit(1) DEFAULT b'1'
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
+    $tables += mysqli_query($connection, $query);
+    
 
-      `idDetalleFactura` INT NOT NULL,
-      `idUsuario` INT NOT NULL,
-      `idOrden` INT NOT NULL
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
+    $query = "CREATE TABLE `sucursales` (
+      `idSucursal` int(11) NOT NULL,
+      `nombre` varchar(70) NOT NULL,
+      `telefono` varchar(8) NOT NULL,
+      `direccion` varchar(100) NOT NULL,
+      `email` varchar(100) DEFAULT NULL,
+      `isActive` bit(1) DEFAULT b'1'
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
     $tables += mysqli_query($connection, $query);
 
-    // Add double primary keys to orden
-    // $query = "ALTER TABLE `ordenes`
-    //   ADD PRIMARY KEY (`idOrdenes`),
-    //   ADD KEY(`numeroProducto`)";
-    // $response = mysqli_query($connection, $query);
+    $query = "CREATE TABLE `unidades` (
+      `idUnidad` int(11) NOT NULL,
+      `Nombre` varchar(30) NOT NULL,
+      `Descripcion` varchar(100) NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
+    $tables += mysqli_query($connection, $query);
+
+    $query = "CREATE TABLE `usuarios` (
+      `idUsuario` int(11) NOT NULL,
+      `email` varchar(100) NOT NULL,
+      `password` varchar(255) NOT NULL,
+      `isActive` bit(1) DEFAULT b'1',
+      `isAdmin` bit(1) DEFAULT b'0',
+      `idCliente` int(11) NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
+    $tables += mysqli_query($connection, $query);
 
     // Create the relations between tables
     $query = "ALTER TABLE `productos` 
