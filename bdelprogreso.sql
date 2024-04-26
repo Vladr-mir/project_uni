@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-12-2022 a las 04:46:04
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 8.1.6
+-- Tiempo de generación: 26-04-2024 a las 08:22:08
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,22 +29,51 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categorias` (
   `idCategoria` int(11) NOT NULL,
-  `nombre` varchar(200) NOT NULL,
-  `descripcion` varchar(200) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `descripcion` varchar(100) NOT NULL,
   `isActive` bit(1) DEFAULT b'1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `detallefacturas`
+-- Estructura de tabla para la tabla `clientes`
 --
 
-CREATE TABLE `detallefacturas` (
-  `idDetalleFactura` int(11) NOT NULL,
-  `idVendedor` int(11) NOT NULL,
-  `idModo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `clientes` (
+  `idCliente` int(11) NOT NULL,
+  `nombres` varchar(60) NOT NULL,
+  `apellidos` varchar(60) NOT NULL,
+  `direccion` varchar(300) NOT NULL,
+  `telefono` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `delivery`
+--
+
+CREATE TABLE `delivery` (
+  `idDelivery` int(11) NOT NULL,
+  `nombres` varchar(60) NOT NULL,
+  `apellidos` varchar(60) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalleordenes`
+--
+
+CREATE TABLE `detalleordenes` (
+  `idNumeroDeOrden` int(11) NOT NULL,
+  `idNumProducto` int(11) NOT NULL,
+  `idProducto` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `precio` double(10,2) NOT NULL,
+  `numeroDocumento` varchar(8) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -55,10 +84,13 @@ CREATE TABLE `detallefacturas` (
 CREATE TABLE `facturas` (
   `numFactura` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `idDetalleFactura` int(11) NOT NULL,
+  `total` decimal(10,2) NOT NULL,
+  `direccion` varchar(300) NOT NULL,
   `idUsuario` int(11) NOT NULL,
-  `idOrden` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `idOrden` int(11) NOT NULL,
+  `idSucursal` int(11) NOT NULL,
+  `idModoPago` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -70,7 +102,7 @@ CREATE TABLE `modopagos` (
   `idModo` int(11) NOT NULL,
   `tipoPago` varchar(25) NOT NULL,
   `isActive` bit(1) DEFAULT b'1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -80,9 +112,14 @@ CREATE TABLE `modopagos` (
 
 CREATE TABLE `ordenes` (
   `idOrden` int(11) NOT NULL,
-  `numeroProducto` int(11) NOT NULL,
-  `idProducto` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `total` double(10,2) NOT NULL,
+  `formaDePago` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `Hora` datetime NOT NULL,
+  `numeroDocumento` varchar(8) NOT NULL,
+  `idDelivery` int(11) NOT NULL,
+  `numeroDeOrden` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -97,8 +134,9 @@ CREATE TABLE `productos` (
   `stock` int(11) NOT NULL,
   `isActive` bit(1) DEFAULT b'1',
   `idCategoria` int(11) NOT NULL,
-  `idProveedor` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `idProveedor` int(11) NOT NULL,
+  `idUnidad` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -112,7 +150,34 @@ CREATE TABLE `proveedores` (
   `telefono` varchar(8) NOT NULL,
   `email` varchar(100) NOT NULL,
   `isActive` bit(1) DEFAULT b'1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sucursales`
+--
+
+CREATE TABLE `sucursales` (
+  `idSucursal` int(11) NOT NULL,
+  `nombre` varchar(70) NOT NULL,
+  `telefono` varchar(8) NOT NULL,
+  `direccion` varchar(100) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `isActive` bit(1) DEFAULT b'1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `unidades`
+--
+
+CREATE TABLE `unidades` (
+  `idUnidad` int(11) NOT NULL,
+  `Nombre` varchar(30) NOT NULL,
+  `Descripcion` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -122,30 +187,12 @@ CREATE TABLE `proveedores` (
 
 CREATE TABLE `usuarios` (
   `idUsuario` int(11) NOT NULL,
-  `username` varchar(70) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `nombre` varchar(70) NOT NULL,
-  `apellido` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `telefono` varchar(8) NOT NULL,
   `isActive` bit(1) DEFAULT b'1',
-  `isAdmin` bit(1) DEFAULT b'0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `vendedores`
---
-
-CREATE TABLE `vendedores` (
-  `idVendedor` int(11) NOT NULL,
-  `nombre` varchar(70) NOT NULL,
-  `apellido` varchar(100) NOT NULL,
-  `telefono` varchar(8) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `isActive` bit(1) DEFAULT b'1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `isAdmin` bit(1) DEFAULT b'0',
+  `idCliente` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Índices para tablas volcadas
@@ -158,21 +205,33 @@ ALTER TABLE `categorias`
   ADD PRIMARY KEY (`idCategoria`);
 
 --
--- Indices de la tabla `detallefacturas`
+-- Indices de la tabla `clientes`
 --
-ALTER TABLE `detallefacturas`
-  ADD PRIMARY KEY (`idDetalleFactura`),
-  ADD KEY `detalle_ibfk_1` (`idVendedor`),
-  ADD KEY `detalle_ibfk_2` (`idModo`);
+ALTER TABLE `clientes`
+  ADD PRIMARY KEY (`idCliente`);
+
+--
+-- Indices de la tabla `delivery`
+--
+ALTER TABLE `delivery`
+  ADD PRIMARY KEY (`idDelivery`);
+
+--
+-- Indices de la tabla `detalleordenes`
+--
+ALTER TABLE `detalleordenes`
+  ADD PRIMARY KEY (`idNumeroDeOrden`,`idNumProducto`),
+  ADD KEY `detalleOrdenes_ibfk1` (`idProducto`);
 
 --
 -- Indices de la tabla `facturas`
 --
 ALTER TABLE `facturas`
   ADD PRIMARY KEY (`numFactura`),
-  ADD KEY `factura_ibfk_1` (`idDetalleFactura`),
   ADD KEY `factura_ibfk_2` (`idUsuario`),
-  ADD KEY `factura_ibfk_3` (`idOrden`);
+  ADD KEY `factura_ibfk_3` (`idOrden`),
+  ADD KEY `factura_ibfk_4` (`idSucursal`),
+  ADD KEY `factura_ibfk_5` (`idModoPago`);
 
 --
 -- Indices de la tabla `modopagos`
@@ -184,8 +243,10 @@ ALTER TABLE `modopagos`
 -- Indices de la tabla `ordenes`
 --
 ALTER TABLE `ordenes`
-  ADD PRIMARY KEY (`idOrden`,`numeroProducto`),
-  ADD KEY `orden_ibfk_1` (`idProducto`);
+  ADD PRIMARY KEY (`idOrden`),
+  ADD KEY `orden_ibfk_1` (`idDelivery`),
+  ADD KEY `orden_ibfk_2` (`numeroDeOrden`),
+  ADD KEY `orden_ibfk3` (`formaDePago`);
 
 --
 -- Indices de la tabla `productos`
@@ -193,7 +254,8 @@ ALTER TABLE `ordenes`
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`idProducto`),
   ADD KEY `producto_ibfk_1` (`idCategoria`),
-  ADD KEY `producto_ibfk_2` (`idProveedor`);
+  ADD KEY `producto_ibfk_2` (`idProveedor`),
+  ADD KEY `producto_ibfk_3` (`idUnidad`);
 
 --
 -- Indices de la tabla `proveedores`
@@ -202,16 +264,23 @@ ALTER TABLE `proveedores`
   ADD PRIMARY KEY (`idProveedor`);
 
 --
+-- Indices de la tabla `sucursales`
+--
+ALTER TABLE `sucursales`
+  ADD PRIMARY KEY (`idSucursal`);
+
+--
+-- Indices de la tabla `unidades`
+--
+ALTER TABLE `unidades`
+  ADD PRIMARY KEY (`idUnidad`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`idUsuario`);
-
---
--- Indices de la tabla `vendedores`
---
-ALTER TABLE `vendedores`
-  ADD PRIMARY KEY (`idVendedor`);
+  ADD PRIMARY KEY (`idUsuario`),
+  ADD KEY `usuarios_fk1` (`idCliente`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -222,6 +291,18 @@ ALTER TABLE `vendedores`
 --
 ALTER TABLE `categorias`
   MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `clientes`
+--
+ALTER TABLE `clientes`
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `delivery`
+--
+ALTER TABLE `delivery`
+  MODIFY `idDelivery` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `facturas`
@@ -248,51 +329,65 @@ ALTER TABLE `proveedores`
   MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `sucursales`
+--
+ALTER TABLE `sucursales`
+  MODIFY `idSucursal` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `unidades`
+--
+ALTER TABLE `unidades`
+  MODIFY `idUnidad` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `vendedores`
---
-ALTER TABLE `vendedores`
-  MODIFY `idVendedor` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `detallefacturas`
+-- Filtros para la tabla `detalleordenes`
 --
-ALTER TABLE `detallefacturas`
-  ADD CONSTRAINT `detalle_ibfk_1` FOREIGN KEY (`idVendedor`) REFERENCES `vendedores` (`idVendedor`),
-  ADD CONSTRAINT `detalle_ibfk_2` FOREIGN KEY (`idModo`) REFERENCES `modopagos` (`idModo`);
+ALTER TABLE `detalleordenes`
+  ADD CONSTRAINT `detalleOrdenes_ibfk1` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`);
 
 --
 -- Filtros para la tabla `facturas`
 --
 ALTER TABLE `facturas`
-  ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`idDetalleFactura`) REFERENCES `detallefacturas` (`idDetalleFactura`),
   ADD CONSTRAINT `factura_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`),
-  ADD CONSTRAINT `factura_ibfk_3` FOREIGN KEY (`idOrden`) REFERENCES `ordenes` (`idOrden`);
+  ADD CONSTRAINT `factura_ibfk_3` FOREIGN KEY (`idOrden`) REFERENCES `ordenes` (`idOrden`),
+  ADD CONSTRAINT `factura_ibfk_4` FOREIGN KEY (`idSucursal`) REFERENCES `sucursales` (`idSucursal`),
+  ADD CONSTRAINT `factura_ibfk_5` FOREIGN KEY (`idModoPago`) REFERENCES `modopagos` (`idModo`);
 
 --
 -- Filtros para la tabla `ordenes`
 --
 ALTER TABLE `ordenes`
-  ADD CONSTRAINT `orden_ibfk_1` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`);
+  ADD CONSTRAINT `orden_ibfk3` FOREIGN KEY (`formaDePago`) REFERENCES `modopagos` (`idModo`),
+  ADD CONSTRAINT `orden_ibfk_1` FOREIGN KEY (`idDelivery`) REFERENCES `delivery` (`idDelivery`),
+  ADD CONSTRAINT `orden_ibfk_2` FOREIGN KEY (`numeroDeOrden`) REFERENCES `detalleordenes` (`idNumeroDeOrden`);
 
 --
 -- Filtros para la tabla `productos`
 --
 ALTER TABLE `productos`
   ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`idCategoria`) REFERENCES `categorias` (`idCategoria`),
-  ADD CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`idProveedor`) REFERENCES `proveedores` (`idProveedor`);
+  ADD CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`idProveedor`) REFERENCES `proveedores` (`idProveedor`),
+  ADD CONSTRAINT `producto_ibfk_3` FOREIGN KEY (`idUnidad`) REFERENCES `unidades` (`idUnidad`);
+
+--
+-- Filtros para la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `usuarios_fk1` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`idCliente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
