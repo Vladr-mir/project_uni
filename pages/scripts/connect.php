@@ -1,18 +1,18 @@
 <?php
-$port = "";
-$hostname = "localhost:{$port}";
-$username = "root";
-$password = "";
-$database = "bdelprogreso";
+// edit this file if you want to change the configurations
+include ('config.php');
 
-function connectDB() {
-  // ! edit this file when the project is not in development stage
-    return mysqli_connect($hostname, $username, $password, $database);
-  }
+$config = $config['database']['default'];
 
-function createDB() {
-  $connection = mysqli_connect($hostname, $username, $password);
-  $query = "CREATE DATABASE IF NOT EXISTS $database;";
-  return mysqli_query($connection, $query);
-}
+$connectDB = function() use ($config) {
+  return mysqli_connect($config['host'], $config['user'], $config['pass'], $config['name']);
+};
+
+$createDB = function() use ($config) {
+  $connection = mysqli_connect($config['host'], $config['user'], $config['pass']);
+  $query = "CREATE DATABASE IF NOT EXISTS {$config['name']};";
+  $result = mysqli_query($connection, $query);
+  mysqli_close($connection);
+  return $result;
+};
 ?>
