@@ -9,22 +9,23 @@
 <body>
  <?php
     // TODO: Finish the primary keys and fk constraints
-    $database = "bdelprogreso";
+    // $database = "bdelprogreso";
+    $connection;
     $tables = 0;
     $relationships = 0;
 
     require('./pages/scripts/connect.php');
-    createDB();
-    $connection = connectDB();
+    $response = $createDB();
+    $connection = $connectDB();
 
     // Create database
-    $query = "CREATE DATABASE IF NOT EXISTS $database;";
-    $response = mysqli_query($connection, $query);
-    mysqli_select_db($connection, $database);
+    // $query = "CREATE DATABASE IF NOT EXISTS $database;";
+    // $response = mysqli_query($connection, $query);
+    // mysqli_select_db($connection, $database);
 
     // Create tables
     $query = "CREATE TABLE `categorias` (
-      `idCategoria` int(11) NOT NULL,
+      `idCategoria` int(11) AUTO_INCREMENT PRIMARY KEY,
       `nombre` varchar(50) NOT NULL,
       `descripcion` varchar(100) NOT NULL,
       `isActive` bit(1) DEFAULT b'1'
@@ -32,7 +33,7 @@
     $tables += mysqli_query($connection, $query);
 
     $query = "CREATE TABLE `clientes` (
-      `idCliente` int(11) NOT NULL,
+      `idCliente` int(11) AUTO_INCREMENT PRIMARY KEY,
       `nombres` varchar(60) NOT NULL,
       `apellidos` varchar(60) NOT NULL,
       `direccion` varchar(300) NOT NULL,
@@ -41,14 +42,14 @@
     $tables += mysqli_query($connection, $query);
 
     $query = "CREATE TABLE `delivery` (
-      `idDelivery` int(11) NOT NULL,
+      `idDelivery` int(11) AUTO_INCREMENT PRIMARY KEY,
       `nombres` varchar(60) NOT NULL,
       `apellidos` varchar(60) NOT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
     $tables += mysqli_query($connection, $query);
 
     $query = "CREATE TABLE `detalleordenes` (
-      `idNumeroDeOrden` int(11) NOT NULL,
+      `idNumeroDeOrden` int(11) AUTO_INCREMENT PRIMARY KEY,
       `idNumProducto` int(11) NOT NULL,
       `idProducto` int(11) NOT NULL,
       `cantidad` int(11) NOT NULL,
@@ -59,7 +60,7 @@
 
     // categories are for products
    $query = "CREATE TABLE `facturas` (
-      `numFactura` int(11) NOT NULL,
+      `numFactura` int(11) AUTO_INCREMENT PRIMARY KEY,
       `fecha` date NOT NULL,
       `total` decimal(10,2) NOT NULL,
       `direccion` varchar(300) NOT NULL,
@@ -71,14 +72,14 @@
     $tables += mysqli_query($connection, $query);
 
    $query = "CREATE TABLE `modopagos` (
-      `idModo` int(11) NOT NULL,
+      `idModo` int(11) AUTO_INCREMENT PRIMARY KEY,
       `tipoPago` varchar(25) NOT NULL,
       `isActive` bit(1) DEFAULT b'1'
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
     $tables += mysqli_query($connection, $query);
 
     $query = "CREATE TABLE `ordenes` (
-      `idOrden` int(11) NOT NULL,
+      `idOrden` int(11) AUTO_INCREMENT PRIMARY KEY,
       `total` double(10,2) NOT NULL,
       `formaDePago` int(11) NOT NULL,
       `fecha` date NOT NULL,
@@ -90,7 +91,7 @@
     $tables += mysqli_query($connection, $query);
 
     $query = "CREATE TABLE `productos` (
-      `idProducto` int(11) NOT NULL,
+      `idProducto` int(11) AUTO_INCREMENT PRIMARY KEY,
       `nombre` varchar(200) NOT NULL,
       `precio` decimal(10,2) NOT NULL,
       `stock` int(11) NOT NULL,
@@ -102,7 +103,7 @@
     $tables += mysqli_query($connection, $query);
 
     $query = "CREATE TABLE `proveedores` (
-      `idProveedor` int(11) NOT NULL,
+      `idProveedor` int(11) AUTO_INCREMENT PRIMARY KEY,
       `nombre` varchar(200) NOT NULL,
       `telefono` varchar(8) NOT NULL,
       `email` varchar(100) NOT NULL,
@@ -112,7 +113,7 @@
     
 
     $query = "CREATE TABLE `sucursales` (
-      `idSucursal` int(11) NOT NULL,
+      `idSucursal` int(11) AUTO_INCREMENT PRIMARY KEY,
       `nombre` varchar(70) NOT NULL,
       `telefono` varchar(8) NOT NULL,
       `direccion` varchar(100) NOT NULL,
@@ -122,14 +123,14 @@
     $tables += mysqli_query($connection, $query);
 
     $query = "CREATE TABLE `unidades` (
-      `idUnidad` int(11) NOT NULL,
+      `idUnidad` int(11) AUTO_INCREMENT PRIMARY KEY,
       `Nombre` varchar(30) NOT NULL,
       `Descripcion` varchar(100) NOT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
     $tables += mysqli_query($connection, $query);
 
     $query = "CREATE TABLE `usuarios` (
-      `idUsuario` int(11) NOT NULL,
+      `idUsuario` int(11) AUTO_INCREMENT PRIMARY KEY,
       `email` varchar(100) NOT NULL,
       `password` varchar(255) NOT NULL,
       `isActive` bit(1) DEFAULT b'1',
@@ -139,28 +140,31 @@
     $tables += mysqli_query($connection, $query);
 
     // Create the relations between tables
-    $query = "ALTER TABLE `productos` 
-      ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`idCategoria`) REFERENCES `categorias`(`idCategoria`),
-      ADD CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`idProveedor`) REFERENCES `proveedores`(`idProveedor`);";
+    $query = "ALTER TABLE `detalleordenes`
+  ADD CONSTRAINT `detalleOrdenes_ibfk1` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`);";
     $relationships += mysqli_query($connection, $query);
 
-    $query = "ALTER TABLE `ordenes` 
-      ADD CONSTRAINT `orden_ibfk_1` FOREIGN KEY (`idProducto`) REFERENCES `productos`(`idProducto`);";
+    $query = "ALTER TABLE `facturas`
+      ADD CONSTRAINT `factura_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`),
+      ADD CONSTRAINT `factura_ibfk_3` FOREIGN KEY (`idOrden`) REFERENCES `ordenes` (`idOrden`),
+      ADD CONSTRAINT `factura_ibfk_4` FOREIGN KEY (`idSucursal`) REFERENCES `sucursales` (`idSucursal`),
+      ADD CONSTRAINT `factura_ibfk_5` FOREIGN KEY (`idModoPago`) REFERENCES `modopagos` (`idModo`);";
     $relationships += mysqli_query($connection, $query);
 
-    $query = "ALTER TABLE `detalleFacturas` 
-      ADD CONSTRAINT `detalle_ibfk_1` FOREIGN KEY (`idSucursal`) REFERENCES `sucursales`(`idSucursal`),
-      ADD CONSTRAINT `detalle_ibfk_2` FOREIGN KEY (`idModo`) REFERENCES `modoPagos`(`idModo`);";
+    $query = "ALTER TABLE `ordenes`
+      ADD CONSTRAINT `orden_ibfk3` FOREIGN KEY (`formaDePago`) REFERENCES `modopagos` (`idModo`),
+      ADD CONSTRAINT `orden_ibfk_1` FOREIGN KEY (`idDelivery`) REFERENCES `delivery` (`idDelivery`),
+      ADD CONSTRAINT `orden_ibfk_2` FOREIGN KEY (`numeroDeOrden`) REFERENCES `detalleordenes` (`idNumeroDeOrden`);";
     $relationships += mysqli_query($connection, $query);
 
-    $query = "ALTER TABLE `facturas` 
-      ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`idDetalleFactura`) REFERENCES `detalleFacturas`(`idDetalleFactura`),
-      ADD CONSTRAINT `factura_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios`(`idUsuario`),
-      ADD CONSTRAINT `factura_ibfk_3` FOREIGN KEY (`idOrden`) REFERENCES `ordenes`(`idOrden`);";
+    $query = "ALTER TABLE `productos`
+      ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`idCategoria`) REFERENCES `categorias` (`idCategoria`),
+      ADD CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`idProveedor`) REFERENCES `proveedores` (`idProveedor`),
+      ADD CONSTRAINT `producto_ibfk_3` FOREIGN KEY (`idUnidad`) REFERENCES `unidades` (`idUnidad`);";
     $relationships += mysqli_query($connection, $query);
 
-    $query = "INSERT INTO `usuarios` (`idUsuario`, `email`, `nombre`, `apellido`, `password`, `telefono`, `isActive`, `isAdmin`)
-      VALUES (NULL, 'root@mail.com', 'root', 'root', '123', NULL, b'1', b'1');";
+    $query = "ALTER TABLE `usuarios`
+      ADD CONSTRAINT `usuarios_fk1` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`idCliente`);";
     mysqli_query($connection, $query);
 
     mysqli_close($connection);
@@ -184,7 +188,7 @@
       <td>Tablas creadas:</td>
       <td>
         <?php
-          if($tables == 9) {
+          if($tables == 12) {
             echo ("$tables");
           } else {
             echo ("Error, no se han generado todas las tablas");
