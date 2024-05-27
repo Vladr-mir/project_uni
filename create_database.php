@@ -53,7 +53,7 @@
       `idProducto` int(11) NOT NULL,
       `cantidad` int(11) NOT NULL,
       `precio` double(10,2) NOT NULL,
-      `numeroDocumento` varchar(8) NOT NULL
+      `idOrden` int(11) NOT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
     $tables += mysqli_query($connection, $query);
 
@@ -79,13 +79,13 @@
 
     $query = "CREATE TABLE `ordenes` (
       `idOrden` int(11) AUTO_INCREMENT PRIMARY KEY,
-      `total` double(10,2) NOT NULL,
+      `total` double(10,2),
       `formaDePago` int(11) NOT NULL,
       `fecha` date NOT NULL,
       `Hora` datetime NOT NULL,
-      `numeroDocumento` varchar(8) NOT NULL,
-      `idDelivery` int(11) NOT NULL,
-      `numeroDeOrden` int(11) NOT NULL
+      `idDelivery` int(11),
+      `isConfirmed` bit(1) DEFAULT b'0',
+      `isCompleted` bit(1) DEFAULT b'1',
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
     $tables += mysqli_query($connection, $query);
 
@@ -140,7 +140,8 @@
 
     // Create the relations between tables
     $query = "ALTER TABLE `detalleordenes`
-  ADD CONSTRAINT `detalleOrdenes_ibfk1` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`);";
+      ADD CONSTRAINT `detalleOrdenes_ibfk1` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`),
+      ADD CONSTRAINT `detalleOrdenes_ibfk2` FOREIGN KEY (`idOrden`) REFERENCES `ordenes` (`idOrden`)";
     $relationships += mysqli_query($connection, $query);
 
     $query = "ALTER TABLE `facturas`
@@ -152,8 +153,7 @@
 
     $query = "ALTER TABLE `ordenes`
       ADD CONSTRAINT `orden_ibfk3` FOREIGN KEY (`formaDePago`) REFERENCES `modopagos` (`idModo`),
-      ADD CONSTRAINT `orden_ibfk_1` FOREIGN KEY (`idDelivery`) REFERENCES `delivery` (`idDelivery`),
-      ADD CONSTRAINT `orden_ibfk_2` FOREIGN KEY (`numeroDeOrden`) REFERENCES `detalleordenes` (`idNumeroDeOrden`);";
+      ADD CONSTRAINT `orden_ibfk_1` FOREIGN KEY (`idDelivery`) REFERENCES `delivery` (`idDelivery`);";
     $relationships += mysqli_query($connection, $query);
 
     $query = "ALTER TABLE `productos`

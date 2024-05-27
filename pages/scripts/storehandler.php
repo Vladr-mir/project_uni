@@ -10,14 +10,21 @@
   $modoPago = $_POST['modoPago'];
   $userId = $_POST['userId'];
   $date = date('d-m-y');
+  $hour = date('H:i');
 
-  $query = "SELECT `idNumeroDeOrden` FROM `detalleOrdenes` ORDER BY `idOrden` DESC LIMIT 1;";
-  $idOrden = mysqli_fetch_array(mysqli_query($connection, $query));
-  if ($idOrden == null) {
-    $idOrden = 1;
-  } else {
-    $idOrden = reset($idOrden) + 1;
-  }
+  $query = "INSERT INTO `ordenes` (`fecha`, `hora`, `formaDePago`) VALUES ('$date', '$hour', '$modoPago')";
+  $result = mysqli_query($connection, $query);
+  $idOrden = mysqli_insert_id($connection);
+
+  // $query = "SELECT `NumeroDocumento` FROM `detalleOrdenes` WHERE `NumeroDocumento`=(SELECT MAX(`NumeroDocumento`) FROM `detalleOrdenes`";
+
+  // $query = "SELECT `idNumeroDeOrden` FROM `detalleOrdenes` ORDER BY `idOrden` DESC LIMIT 1;";
+  // $idOrden = mysqli_fetch_array(mysqli_query($connection, $query));
+  // if ($idOrden == null) {
+  //   $idOrden = 1;
+  // } else {
+  //   $idOrden = reset($idOrden) + 1;
+  // }
 
   foreach($products as $id) {
     $id_product = $_POST["id$id"];
@@ -41,7 +48,8 @@
     WHERE `idProducto` = '$id_product';";
     $newStockResult = mysqli_query($connection, $newStock);
 
-    $orden = "INSERT INTO `ordenes` (`idOrden`, `numeroProducto`, `idProducto`, `cuantity`) VALUES ($idOrden, '$id', '$id', $cuantity);";
+    // $orden = "INSERT INTO `ordenes` (`idOrden`, `numeroProducto`, `idProducto`, `cuantity`) VALUES ($idOrden, '$id', '$id', $cuantity);";
+    $dtorden = "INSERT INTO `detalleordenes` (`idProducto`, `cantidad`, `precio`, `numeroDocumento`) VALUES ('$id_product', '$cuantity', '$price', '$id_product')";
     $result1 = mysqli_query($connection, $orden);
   }
 
