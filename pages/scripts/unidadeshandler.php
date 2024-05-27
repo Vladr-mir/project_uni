@@ -2,16 +2,18 @@
 
 require('connect.php');
 
-$tipo = $_POST['modo'];
+$unidad = $_POST['unidad'];
+$descripcion = $_POST['descripcion'];
 
 $connection = $connectDB();
-$query = "INSERT INTO `modoPagos` (`tipoPago`) VALUES ('$tipo');";
+$query = "INSERT INTO `unidades` (`Nombre`, `Descripcion`) 
+VALUES ('$unidad', '$descripcion')";
 
 $result = mysqli_query($connection, $query);
 mysqli_close($connection);
 
 if ($result) {
-  header('Location: ../forms/modo_pago.php');
+  header('Location: ../forms/tipo_unidades.php');
   die();
 } else {
   header('Location: ../error.html');

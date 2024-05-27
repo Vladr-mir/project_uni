@@ -3,7 +3,7 @@
   session_start();
 
   $products = json_decode(htmlspecialchars_decode($_POST['productsid']));
-  $connection = connectDB();
+  $connection = $connectDB();
   $total = 0;
 
   $sucursal = $_POST['sucursal'];

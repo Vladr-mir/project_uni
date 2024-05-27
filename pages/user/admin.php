@@ -89,6 +89,20 @@
             <form action="../forms/modo_pago.php"><input type="submit" value="Añadir modo de pago"></form>
             <p>*Es importante añadir como minimo un metodo de pago para que el sistema funcione*</p>
           </div>
+
+
+          <div class="card white">
+            <h1>Añadir medida</h1>
+            <p>En este formulario podrá añadir tipos de unidades de medida</p>
+            <form action="../forms/tipo_unidades.php"><input type="submit" value="Añadir medida"></form>
+            <p>*Es necesario añadir una unidad de medida para poder agregar productos*</p>
+          </div>
+
+          <div class="card white">
+            <h1>Añadir delivery</h1>
+            <p>En este formulario podrá añadir deliverys</p>
+            <form action="../forms/add_delivery.php"><input type="submit" value="Añadir delivery"></form>
+          </div>
         </div>
       </article>
     </section>

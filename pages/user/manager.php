@@ -25,7 +25,9 @@ function getClientID($idUsuario) {
 
 function getAllUserData($id){
   // $query = "SELECT `nombre`, `apellido`, `password`, `telefono`, `email` FROM `usuarios` WHERE `idUsuario` = '$id';";
-  $query = "SELECT clientes.nombres, clientes.apellidos, usuarios.password, clientes.telefono, usuarios.email, clientes.direccion, usuarios.idCliente FROM usuarios INNER JOIN clientes ON usuarios.idUsuario=clientes.idCliente WHERE usuarios.idUsuario=$id;";
+  $query = "SELECT clientes.nombres, clientes.apellidos, usuarios.password, clientes.telefono, usuarios.email, clientes.direccion, usuarios.idCliente 
+  FROM usuarios INNER JOIN clientes ON usuarios.idUsuario=clientes.idCliente 
+  WHERE usuarios.idUsuario=$id;";
   return executeQuery($query);
 }
 

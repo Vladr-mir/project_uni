@@ -7,7 +7,7 @@ $telefono = $_POST['telefono'];
 $direccion = $_POST['direccion'];
 $email = $_POST['email'];
 
-$connection = connectDB();
+$connection = $connectDB();
 $query = "INSERT INTO `sucursales` (`nombre`, `telefono`, `direccion`, `email`) VALUES ('$nombre', '$telefono', '$direccion', '$email');";
 
 $result = mysqli_query($connection, $query);
