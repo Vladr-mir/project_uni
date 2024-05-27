@@ -40,7 +40,7 @@
             die();
           }
 
-          $username = $_SESSION['nombre'];
+          $username = $_SESSION['name'];
           echo ("<h1>Bienvenido: $username</h1>");
         ?>
         

@@ -45,7 +45,7 @@
             die();
           }
 
-          $username = $_SESSION['nombre'];
+          $username = $_SESSION['name'];
           echo ("<h1>Pagina de administrador de: $username</h1>");
         ?>
         

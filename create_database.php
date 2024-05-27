@@ -35,8 +35,8 @@
     $query = "CREATE TABLE `clientes` (
       `idCliente` int(11) AUTO_INCREMENT PRIMARY KEY,
       `nombres` varchar(60) NOT NULL,
-      `apellidos` varchar(60) NOT NULL,
-      `direccion` varchar(300) NOT NULL,
+      `apellidos` varchar(60),
+      `direccion` varchar(300),
       `telefono` varchar(8) NOT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
     $tables += mysqli_query($connection, $query);
@@ -165,6 +165,14 @@
 
     $query = "ALTER TABLE `usuarios`
       ADD CONSTRAINT `usuarios_fk1` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`idCliente`);";
+    $relationships += mysqli_query($connection, $query);
+
+    $query = "INSERT INTO `clientes` (`idCliente`, `nombres`, `apellidos`, `direccion`, `telefono`)
+    VALUES (NULL, 'root', NULL, NULL, '8888888');";
+    mysqli_query($connection, $query);
+
+    $query = "INSERT INTO `usuarios` (`idUsuario`, `email`, `password`, `isActive`, `isAdmin`, `idCliente`)
+    VALUES (NULL, 'root@mail.com', '123', b'1', b'1', '1');";
     mysqli_query($connection, $query);
 
     mysqli_close($connection);
@@ -201,7 +209,7 @@
       <td>Relaciones:</td>
       <td>
         <?php
-          if($relationships == 4) {
+          if($relationships == 5) {
             echo ("$relationships");
           } else {
             echo ("Error no se han creado todas las relaciones");

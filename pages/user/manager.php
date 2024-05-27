@@ -2,11 +2,12 @@
 require('../scripts/connect.php');
 
 function isConnected() {
-  return $_SESSION['nombre'] != null;
+  // session_start();
+  return $_SESSION['email'] != null;
 }
 
 function executeQuery($query){
-  $connection = connectDB();
+  $connection = $GLOBALS['connectDB']();
   $response = mysqli_fetch_array(mysqli_query($connection, $query));
   mysqli_close($connection);
   return $response;

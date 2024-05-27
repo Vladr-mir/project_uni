@@ -3,7 +3,7 @@
 $config = array(
   'database' => array(
     'default' => array(
-      'name' => 'DBtest',
+      'name' => 'dbdev',
       'host' => 'localhost', 
       'user' => 'root',
       'pass' => ''

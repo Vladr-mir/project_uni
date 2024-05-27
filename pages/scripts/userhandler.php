@@ -1,5 +1,5 @@
 <?php
-// require('connect.php');
+// Este archivo realiza cambios al usuario.
 require('../user/manager.php');
 session_start();
 
