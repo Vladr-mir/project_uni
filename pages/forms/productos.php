@@ -75,7 +75,7 @@
             <td>
               <select name="categoria">
                 <?php
-                  $connection = connectDB();
+                  $connection = $connectDB();
 
                   $query = "SELECT `idCategoria`, `nombre` FROM `categorias`";
                   $result = mysqli_query($connection, $query);
@@ -99,7 +99,7 @@
             <td>
               <select name="proveedor">
                 <?php
-                  $connection = connectDB();
+                  $connection = $connectDB();
 
                   $query = "SELECT `idProveedor`, `nombre` FROM `proveedores`";
                   $result = mysqli_query($connection, $query);
@@ -116,6 +116,30 @@
               </select>
             </td>
           </tr>
+
+          <tr>
+            <td>Medida:</td>
+            <td>
+              <select name="unidad">
+                <?php
+                  $connection = $connectDB();
+
+                  $query = "SELECT `idUnidad`, `nombre` FROM `unidades`";
+                  $result = mysqli_query($connection, $query);
+                  mysqli_close($connection);
+
+                  while ($row_unid = mysqli_fetch_assoc($result)) {
+                    $unidad[] = $row_unid;
+                  }
+
+                  foreach($unidad as $row) {
+                    echo "<option value=\"".$row['idUnidad']."\">".$row['nombre']."</option>";
+                  }
+                ?>
+              </select>
+            </td>
+          </tr>
+
 
           <!-- row:6 -->
           <tr>

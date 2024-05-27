@@ -7,10 +7,11 @@ $stock = $_POST['stock'];
 
 $idCategoria = $_POST['categoria'];
 $idProveedor = $_POST['proveedor'];
+$idUnidad = $_POST['unidad'];
 
-$connection = connectDB();
-$query = "INSERT INTO `productos` (`nombre`, `precio`, `stock`, `idCategoria`, `idProveedor`)
-VALUES ('$nombre', '$precio', '$stock', '$idCategoria', '$idProveedor');";
+$connection = $connectDB();
+$query = "INSERT INTO `productos` (`nombre`, `precio`, `stock`, `idCategoria`, `idProveedor`, `idUnidad`)
+VALUES ('$nombre', '$precio', '$stock', '$idCategoria', '$idProveedor', '$idUnidad');";
 
 $result = mysqli_query($connection, $query);
 

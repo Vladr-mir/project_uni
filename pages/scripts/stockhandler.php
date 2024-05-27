@@ -5,7 +5,7 @@ $id = $_POST['id'];
 $stock = $_POST['stock'];
 $is_active = $_POST['isActive'];
 
-$connection = connectDB();
+$connection = $connectDB();
 $query = "UPDATE `productos`
 SET `stock` = '$stock', `isActive` = '$is_active'
 WHERE `idProducto` = '$id';";

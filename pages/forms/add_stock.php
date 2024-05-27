@@ -50,7 +50,7 @@
       <article class="bright">
         <div class="card-holder">
           <?php
-            $connection = connectDB();
+            $connection = $connectDB();
 
             $query = "SELECT `idProducto`, `nombre`, `stock`, `isActive` FROM `productos`";
             $result = mysqli_query($connection, $query);
