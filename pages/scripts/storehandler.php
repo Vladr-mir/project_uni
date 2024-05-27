@@ -11,7 +11,7 @@
   $userId = $_POST['userId'];
   $date = date('d-m-y');
 
-  $query = "SELECT `idOrden` FROM `ordenes` ORDER BY `idOrden` DESC LIMIT 1;";
+  $query = "SELECT `idNumeroDeOrden` FROM `detalleOrdenes` ORDER BY `idOrden` DESC LIMIT 1;";
   $idOrden = mysqli_fetch_array(mysqli_query($connection, $query));
   if ($idOrden == null) {
     $idOrden = 1;

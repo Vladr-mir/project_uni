@@ -50,7 +50,6 @@
 
     $query = "CREATE TABLE `detalleordenes` (
       `idNumeroDeOrden` int(11) AUTO_INCREMENT PRIMARY KEY,
-      `idNumProducto` int(11) NOT NULL,
       `idProducto` int(11) NOT NULL,
       `cantidad` int(11) NOT NULL,
       `precio` double(10,2) NOT NULL,

@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../style.css">
-  <script src="main.js" defer></script>
+  <script src="../../main.js" defer></script>
   <title>Tienda</title>
 </head>
 <body>
@@ -44,12 +44,12 @@
       <article class="bright">
         <form action="../scripts/storehandler.php" method="post">
           <div class="card-holder">
-            <div class="paper white">
+            <div class="card" style="background-color: #d0f19a;">
               <h1>Datos de la compra</h1>
               Elegir sucursal:
               <select name="sucursal">
                 <?php
-                  $connection = connectDB();
+                  $connection = $connectDB();
 
                   $query = "SELECT `idSucursal`, `nombre` FROM `sucursales`";
                   $result = mysqli_query($connection, $query);
@@ -68,7 +68,7 @@
               Elegir metodo de pago:
               <select name="modoPago">
                 <?php
-                  $connection = connectDB();
+                  $connection = $connectDB();
 
                   $query = "SELECT `idModo`, `tipoPago` FROM `modoPagos`";
                   $result = mysqli_query($connection, $query);
@@ -84,13 +84,19 @@
                 ?>
               </select>
               <br>
+              <br>
+              <br>
               <input type="submit" value="Comprar">
             </div>
+
             <?php
-              $connection = connectDB();
+              $connection = $connectDB();
               $data = [];
   
-              $query = "SELECT `idProducto`, `nombre`, `stock`, `isActive`, `precio` FROM `productos` WHERE `isActive` = b'1'";
+              $query = "SELECT productos.idProducto, productos.nombre, productos.stock, productos.isActive, productos.precio, unidades.Nombre as medida 
+              FROM productos INNER JOIN unidades 
+              ON productos.idUnidad=unidades.idUnidad WHERE isActive=1;";
+
               $result = mysqli_query($connection, $query);
               mysqli_close($connection);
   
@@ -102,12 +108,12 @@
                 array_push($data, $row['idProducto']);
                 echo("<div class=\"card white\">");
                 echo("<h1>".$row['nombre']."</h1>");
-                echo("<p>Stock: ".$row['stock']." unidades</p>");
+                echo("<p>Disponibles: ".$row['stock']." ".$row['medida']."</p>");
                 echo("<p>Precio: ".$row['precio']."$</p>");
                 echo("<input type=\"hidden\" name=\"id".$row['idProducto']."\" value=\"".$row['idProducto']."\">");
                 echo("<input type=\"hidden\" name=\"price".$row['idProducto']."\" value=\"".$row['precio']."\">");
                 echo("<input type=\"hidden\" name=\"stock".$row['idProducto']."\" value=\"".$row['stock']."\">");
-                echo("<input type=\"number\" name=\"cuantity".$row['idProducto']."\" value=\"0\">");
+                echo("<input type=\"number\" name=\"cuantity".$row['idProducto']."\" value=\"0\" min=\"0\" max=\"".$row['stock']."\">");
                 echo("</div>");
               }
 
