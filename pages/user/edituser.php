@@ -40,10 +40,11 @@
       $id = getUserID($_SESSION['email']);
       $userData = getAllUserData($id);
       $email = $userData['email'];
-      $name = $userData['nombre'];
-      $lastname = $userData['apellido'];
+      $name = $userData['nombres'];
+      $lastname = $userData['apellidos'];
       $password = $userData['password'];
       $phone = $userData['telefono'];
+      $direction = $userData['direccion'];
     ?>
     <!-- En esta seccion se encuentra el contenido de la pagina -->
     <section>
@@ -79,11 +80,17 @@
   
               <!-- row:5 -->
               <tr>
+                <td>Direccion:</td>
+                <td><input name="direction" type="text" value="<?php echo("$direction") ?>"></td>
+              </tr>
+
+              <!-- row:6 -->
+              <tr>
                 <td>Telefono:</td>
                 <td><input name="phone" type="tel" value="<?php echo("$phone") ?>"></td>
               </tr>
   
-              <!-- row:6 -->
+              <!-- row:7 -->
               <tr>
                 <td colspan="2">
                   <input type="submit" value="Actualizar">
