@@ -10,10 +10,11 @@
   $modoPago = $_POST['modoPago'];
   $userId = $_POST['userId'];
   $direction = $_POST['direccion'];
+  $sucursal = $_POST['sucursal'];
   $date = date('d-m-y');
   $hour = date('H:i');
 
-  $query = "INSERT INTO `ordenes` (`fecha`, `hora`, `formaDePago`, `idUsuario`, `direccion`) VALUES ('$date', '$hour', '$modoPago', '$userId', '$direction')";
+  $query = "INSERT INTO `ordenes` (`fecha`, `hora`, `formaDePago`, `idUsuario`, `direccion`, `idSucursal`) VALUES ('$date', '$hour', '$modoPago', '$userId', '$direction', '$sucursal')";
   $result = mysqli_query($connection, $query);
   $idOrden = mysqli_insert_id($connection);
 

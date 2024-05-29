@@ -85,6 +85,7 @@
       `Hora` datetime NOT NULL,
       `idDelivery` int(11),
       `idUsuario` int(11) NOT NULL,
+      `idSucursal` int(11) NOT NULL,
       `direccion` varchar(300) NOT NULL,
       `isConfirmed` bit(1) DEFAULT b'0',
       `isCompleted` bit(1) DEFAULT b'0',
@@ -155,8 +156,9 @@
     $relationships += mysqli_query($connection, $query);
 
     $query = "ALTER TABLE `ordenes`
-      ADD CONSTRAINT `orden_ibfk3` FOREIGN KEY (`formaDePago`) REFERENCES `modopagos` (`idModo`),
-      ADD CONSTRAINT `orden_ibfk_1` FOREIGN KEY (`idDelivery`) REFERENCES `delivery` (`idDelivery`);";
+      ADD CONSTRAINT `orden_ibfk_1` FOREIGN KEY (`formaDePago`) REFERENCES `modopagos` (`idModo`),
+      ADD CONSTRAINT `orden_ibfk_2` FOREIGN KEY (`idDelivery`) REFERENCES `delivery` (`idDelivery`),
+      ADD CONSTRAINT `orden_ibfk_3` FOREIGN KEY (`idSucursal`) REFERENCES `sucursales` (`idSucursal`);";
     $relationships += mysqli_query($connection, $query);
 
     $query = "ALTER TABLE `productos`
