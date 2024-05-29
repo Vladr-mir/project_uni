@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-04-2024 a las 08:22:08
+-- Tiempo de generación: 29-05-2024 a las 20:03:21
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `bdelprogreso`
+-- Base de datos: `dbdev`
 --
 
 -- --------------------------------------------------------
@@ -34,6 +34,14 @@ CREATE TABLE `categorias` (
   `isActive` bit(1) DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`idCategoria`, `nombre`, `descripcion`, `isActive`) VALUES
+(1, 'Embutidos', 'son embutidos', b'1'),
+(2, 'Carnes', 'Cortes de carne', b'1');
+
 -- --------------------------------------------------------
 
 --
@@ -43,10 +51,17 @@ CREATE TABLE `categorias` (
 CREATE TABLE `clientes` (
   `idCliente` int(11) NOT NULL,
   `nombres` varchar(60) NOT NULL,
-  `apellidos` varchar(60) NOT NULL,
-  `direccion` varchar(300) NOT NULL,
+  `apellidos` varchar(60) DEFAULT NULL,
+  `direccion` varchar(300) DEFAULT NULL,
   `telefono` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`idCliente`, `nombres`, `apellidos`, `direccion`, `telefono`) VALUES
+(1, 'root', NULL, NULL, '8888888');
 
 -- --------------------------------------------------------
 
@@ -60,6 +75,13 @@ CREATE TABLE `delivery` (
   `apellidos` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `delivery`
+--
+
+INSERT INTO `delivery` (`idDelivery`, `nombres`, `apellidos`) VALUES
+(1, 'Nombre', 'jalkfjlka');
+
 -- --------------------------------------------------------
 
 --
@@ -68,12 +90,23 @@ CREATE TABLE `delivery` (
 
 CREATE TABLE `detalleordenes` (
   `idNumeroDeOrden` int(11) NOT NULL,
-  `idNumProducto` int(11) NOT NULL,
   `idProducto` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `precio` double(10,2) NOT NULL,
-  `numeroDocumento` varchar(8) NOT NULL
+  `idOrden` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `detalleordenes`
+--
+
+INSERT INTO `detalleordenes` (`idNumeroDeOrden`, `idProducto`, `cantidad`, `precio`, `idOrden`) VALUES
+(1, 1, 7, 3.75, 1),
+(2, 2, 1, 3.00, 1),
+(3, 2, 1, 3.00, 2),
+(4, 3, 2, 2.50, 2),
+(5, 2, 6, 3.00, 3),
+(6, 3, 1, 2.50, 3);
 
 -- --------------------------------------------------------
 
@@ -92,6 +125,14 @@ CREATE TABLE `facturas` (
   `idModoPago` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `facturas`
+--
+
+INSERT INTO `facturas` (`numFactura`, `fecha`, `total`, `direccion`, `idUsuario`, `idOrden`, `idSucursal`, `idModoPago`) VALUES
+(2, '2029-05-24', 29.25, 'San miguel', 1, 1, 1, 1),
+(3, '2029-05-24', 8.00, 'jalkdjalk', 1, 2, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -104,6 +145,13 @@ CREATE TABLE `modopagos` (
   `isActive` bit(1) DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `modopagos`
+--
+
+INSERT INTO `modopagos` (`idModo`, `tipoPago`, `isActive`) VALUES
+(1, 'Pago en físico', b'1');
+
 -- --------------------------------------------------------
 
 --
@@ -112,14 +160,27 @@ CREATE TABLE `modopagos` (
 
 CREATE TABLE `ordenes` (
   `idOrden` int(11) NOT NULL,
-  `total` double(10,2) NOT NULL,
+  `total` double(10,2) DEFAULT NULL,
   `formaDePago` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `Hora` datetime NOT NULL,
-  `numeroDocumento` varchar(8) NOT NULL,
-  `idDelivery` int(11) NOT NULL,
-  `numeroDeOrden` int(11) NOT NULL
+  `idDelivery` int(11) DEFAULT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `idSucursal` int(11) NOT NULL,
+  `direccion` varchar(300) NOT NULL,
+  `isConfirmed` bit(1) DEFAULT b'0',
+  `isCompleted` bit(1) DEFAULT b'0',
+  `isCancelled` bit(1) DEFAULT b'0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `ordenes`
+--
+
+INSERT INTO `ordenes` (`idOrden`, `total`, `formaDePago`, `fecha`, `Hora`, `idDelivery`, `idUsuario`, `idSucursal`, `direccion`, `isConfirmed`, `isCompleted`, `isCancelled`) VALUES
+(1, 29.25, 1, '2029-05-24', '0000-00-00 00:00:00', 1, 1, 1, 'San miguel', b'0', b'1', b'0'),
+(2, 8.00, 1, '2029-05-24', '0000-00-00 00:00:00', 1, 1, 1, 'jalkdjalk', b'0', b'1', b'0'),
+(3, 20.50, 1, '2029-05-24', '0000-00-00 00:00:00', NULL, 1, 1, 'jljlk', b'0', b'0', b'0');
 
 -- --------------------------------------------------------
 
@@ -138,6 +199,15 @@ CREATE TABLE `productos` (
   `idUnidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`idProducto`, `nombre`, `precio`, `stock`, `isActive`, `idCategoria`, `idProveedor`, `idUnidad`) VALUES
+(1, 'Lomo', 3.75, 0, b'1', 2, 1, 1),
+(2, 'Salchicha', 3.00, 6, b'1', 1, 1, 1),
+(3, 'Chorizo', 2.50, 8, b'1', 1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -151,6 +221,13 @@ CREATE TABLE `proveedores` (
   `email` varchar(100) NOT NULL,
   `isActive` bit(1) DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `proveedores`
+--
+
+INSERT INTO `proveedores` (`idProveedor`, `nombre`, `telefono`, `email`, `isActive`) VALUES
+(1, 'Salchicheria', '11111111', 'cualquier@mail.com', b'1');
 
 -- --------------------------------------------------------
 
@@ -167,6 +244,13 @@ CREATE TABLE `sucursales` (
   `isActive` bit(1) DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `sucursales`
+--
+
+INSERT INTO `sucursales` (`idSucursal`, `nombre`, `telefono`, `direccion`, `email`, `isActive`) VALUES
+(1, 'San Miguel', '123213', 'San miguel', 'cualquier@mail.com', b'1');
+
 -- --------------------------------------------------------
 
 --
@@ -178,6 +262,14 @@ CREATE TABLE `unidades` (
   `Nombre` varchar(30) NOT NULL,
   `Descripcion` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `unidades`
+--
+
+INSERT INTO `unidades` (`idUnidad`, `Nombre`, `Descripcion`) VALUES
+(1, 'Libras', 'libras'),
+(2, 'Libras', 'libras');
 
 -- --------------------------------------------------------
 
@@ -193,6 +285,13 @@ CREATE TABLE `usuarios` (
   `isAdmin` bit(1) DEFAULT b'0',
   `idCliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`idUsuario`, `email`, `password`, `isActive`, `isAdmin`, `idCliente`) VALUES
+(1, 'root@mail.com', '123', b'1', b'1', 1);
 
 --
 -- Índices para tablas volcadas
@@ -220,8 +319,9 @@ ALTER TABLE `delivery`
 -- Indices de la tabla `detalleordenes`
 --
 ALTER TABLE `detalleordenes`
-  ADD PRIMARY KEY (`idNumeroDeOrden`,`idNumProducto`),
-  ADD KEY `detalleOrdenes_ibfk1` (`idProducto`);
+  ADD PRIMARY KEY (`idNumeroDeOrden`),
+  ADD KEY `detalleOrdenes_ibfk1` (`idProducto`),
+  ADD KEY `detalleOrdenes_ibfk2` (`idOrden`);
 
 --
 -- Indices de la tabla `facturas`
@@ -244,9 +344,9 @@ ALTER TABLE `modopagos`
 --
 ALTER TABLE `ordenes`
   ADD PRIMARY KEY (`idOrden`),
-  ADD KEY `orden_ibfk_1` (`idDelivery`),
-  ADD KEY `orden_ibfk_2` (`numeroDeOrden`),
-  ADD KEY `orden_ibfk3` (`formaDePago`);
+  ADD KEY `orden_ibfk_1` (`formaDePago`),
+  ADD KEY `orden_ibfk_2` (`idDelivery`),
+  ADD KEY `orden_ibfk_3` (`idSucursal`);
 
 --
 -- Indices de la tabla `productos`
@@ -280,6 +380,7 @@ ALTER TABLE `unidades`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`idUsuario`),
+  ADD UNIQUE KEY `email` (`email`),
   ADD KEY `usuarios_fk1` (`idCliente`);
 
 --
@@ -290,61 +391,73 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `delivery`
 --
 ALTER TABLE `delivery`
-  MODIFY `idDelivery` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idDelivery` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `detalleordenes`
+--
+ALTER TABLE `detalleordenes`
+  MODIFY `idNumeroDeOrden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `facturas`
 --
 ALTER TABLE `facturas`
-  MODIFY `numFactura` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `numFactura` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `modopagos`
 --
 ALTER TABLE `modopagos`
-  MODIFY `idModo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idModo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `ordenes`
+--
+ALTER TABLE `ordenes`
+  MODIFY `idOrden` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idProducto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idProveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `sucursales`
 --
 ALTER TABLE `sucursales`
-  MODIFY `idSucursal` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idSucursal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `unidades`
 --
 ALTER TABLE `unidades`
-  MODIFY `idUnidad` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUnidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
@@ -354,7 +467,8 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `detalleordenes`
 --
 ALTER TABLE `detalleordenes`
-  ADD CONSTRAINT `detalleOrdenes_ibfk1` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`);
+  ADD CONSTRAINT `detalleOrdenes_ibfk1` FOREIGN KEY (`idProducto`) REFERENCES `productos` (`idProducto`),
+  ADD CONSTRAINT `detalleOrdenes_ibfk2` FOREIGN KEY (`idOrden`) REFERENCES `ordenes` (`idOrden`);
 
 --
 -- Filtros para la tabla `facturas`
@@ -369,9 +483,9 @@ ALTER TABLE `facturas`
 -- Filtros para la tabla `ordenes`
 --
 ALTER TABLE `ordenes`
-  ADD CONSTRAINT `orden_ibfk3` FOREIGN KEY (`formaDePago`) REFERENCES `modopagos` (`idModo`),
-  ADD CONSTRAINT `orden_ibfk_1` FOREIGN KEY (`idDelivery`) REFERENCES `delivery` (`idDelivery`),
-  ADD CONSTRAINT `orden_ibfk_2` FOREIGN KEY (`numeroDeOrden`) REFERENCES `detalleordenes` (`idNumeroDeOrden`);
+  ADD CONSTRAINT `orden_ibfk_1` FOREIGN KEY (`formaDePago`) REFERENCES `modopagos` (`idModo`),
+  ADD CONSTRAINT `orden_ibfk_2` FOREIGN KEY (`idDelivery`) REFERENCES `delivery` (`idDelivery`),
+  ADD CONSTRAINT `orden_ibfk_3` FOREIGN KEY (`idSucursal`) REFERENCES `sucursales` (`idSucursal`);
 
 --
 -- Filtros para la tabla `productos`
