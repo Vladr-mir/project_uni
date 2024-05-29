@@ -52,6 +52,13 @@
             <form action="store.php"><input type="submit" value="Comprar"></form>
          </div>
 
+          <!-- Carta para ir al listado de ordenes -->
+          <div class="card white">
+            <h1>Ordenes</h1>
+            <p>Aqui puedes ver tus ordenes pendientes y completadas.</p>
+            <form action="listOrders.php"><input type="submit" value="Ver Ordenes"></form>
+          </div>
+
           <!-- Carta para ir al formulario de edicion de usuario -->
           <div class="card white">
             <h1>Editar usuario</h1>
@@ -65,7 +72,7 @@
             if(isAdmin($id)) {
               echo ('<div class="card white">');
               echo ("<h1>Administrador</h1>");
-              echo ("<p>Aquí podra acceder a opciones de administrador.</p>");
+              echo ("<p>Aquí podras acceder a opciones de administrador.</p>");
               echo ('<form action="admin.php"><input type="submit" value="Acceder"></form>');
               echo ("<p>*Solo visible para usuarios administradores*</p>");
               echo ("</div>");

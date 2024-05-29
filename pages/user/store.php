@@ -16,7 +16,8 @@
   </header>
 
   <?php
-    require('../user/manager.php');
+    // require('../user/manager.php');
+    require('manager.php');
     session_start();
 
     if (!isConnected()) {
@@ -84,6 +85,11 @@
                 ?>
               </select>
               <br>
+              <?php
+                $userData = getAllUserData($userId);
+                echo("Dirección:");
+                echo('<input type="text" value="'.$userData['direccion'].'" hint=Direccion name=direccion required>')
+              ?>
               <br>
               <br>
               <input type="submit" value="Comprar">

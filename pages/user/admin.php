@@ -49,6 +49,14 @@
           echo ("<h1>Pagina de administrador de: $username</h1>");
         ?>
         
+        <!-- Carta para acceder a la pagina de completar ordenes -->
+        <div class="card-holder">
+          <div class="card white">
+            <h1>Completar ordenes</h1>
+            <p>En esta sección podrá completar ordenes</p>
+            <form action="listAllOrders.php"><input type="submit" value="Completar ordenes"></form>
+         </div>
+
         <!-- Carta para acceder a la pagina de compra  -->
         <div class="card-holder">
           <div class="card white">

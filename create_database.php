@@ -84,8 +84,11 @@
       `fecha` date NOT NULL,
       `Hora` datetime NOT NULL,
       `idDelivery` int(11),
+      `idUsuario` int(11) NOT NULL,
+      `direccion` varchar(300) NOT NULL,
       `isConfirmed` bit(1) DEFAULT b'0',
-      `isCompleted` bit(1) DEFAULT b'1',
+      `isCompleted` bit(1) DEFAULT b'0',
+      `isCancelled` bit(1) DEFAULT b'0'
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;";
     $tables += mysqli_query($connection, $query);
 
@@ -130,7 +133,7 @@
 
     $query = "CREATE TABLE `usuarios` (
       `idUsuario` int(11) AUTO_INCREMENT PRIMARY KEY,
-      `email` varchar(100) NOT NULL,
+      `email` varchar(100) NOT NULL UNIQUE,
       `password` varchar(255) NOT NULL,
       `isActive` bit(1) DEFAULT b'1',
       `isAdmin` bit(1) DEFAULT b'0',
